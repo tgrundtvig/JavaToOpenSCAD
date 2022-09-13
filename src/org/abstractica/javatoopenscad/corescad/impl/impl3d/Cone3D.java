@@ -1,0 +1,40 @@
+package org.abstractica.javatoopenscad.corescad.impl.impl3d;
+
+import org.abstractica.javatoopenscad.corescad.corescad3d.Geometry3D;
+import org.abstractica.javatoopenscad.corescad.impl.AGeometry;
+
+public class Cone3D extends AGeometry implements Geometry3D
+{
+	private final double bottomDiameter;
+	private final double topDiameter;
+	private final double height;
+	private final int angularResolution;
+
+	Cone3D(double bottomDiameter, double topDiameter, double height, int angularResolution)
+	{
+		this.bottomDiameter = bottomDiameter;
+		this.topDiameter = topDiameter;
+		this.height = height;
+		this.angularResolution = angularResolution;
+	}
+
+	public double getBottomDiameter()
+	{
+		return bottomDiameter;
+	}
+
+	public double getTopDiameter()
+	{
+		return topDiameter;
+	}
+
+	public double getHeight()
+	{
+		return height;
+	}
+
+	public int getAngularResolution()
+	{
+		return angularResolution;
+	}
+}
