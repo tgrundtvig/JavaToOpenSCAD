@@ -1,3 +1,5 @@
 out
 OpenSCAD
+.idea
+*.iml
 *.class
