@@ -1,21 +1,21 @@
 package org.abstractica.javatoopenscad.examples;
 
-import org.abstractica.javatoopenscad.scadmodules.impl.SCADModulesImpl;
+import org.abstractica.javatoopenscad.generators.openscad.OpenSCAD;
 import org.abstractica.javatoopenscad.scad.Coord2D;
 import org.abstractica.javatoopenscad.scad.SCAD;
 import org.abstractica.javatoopenscad.scad.impl.SCADImpl;
-import org.abstractica.javatoopenscad.generators.openscad.OpenSCAD;
-import org.abstractica.javatoopenscad.scadmodules.SCADModules;
 import org.abstractica.javatoopenscad.scad.module.SCADModule2D;
 import org.abstractica.javatoopenscad.scad.scad2d.Node2D;
+import org.abstractica.javatoopenscad.scad.scad3d.Geometry3D;
+import org.abstractica.javatoopenscad.scadmodules.SCADModules;
+import org.abstractica.javatoopenscad.scadmodules.impl.SCADModulesImpl;
 
 import java.io.IOException;
 
-public class TestModules
+public class TestUnitCube
 {
 	public static void main(String[] args) throws IOException
 	{
-
 		//Create core
 		SCAD core = new SCADImpl();
 
@@ -23,14 +23,12 @@ public class TestModules
 		SCADModules modules = new SCADModulesImpl();
 
 		//Create geometry
-		Coord2D cornerA = Coord2D.ORIGO;
-		Coord2D cornerB = Coord2D.vector2D(40,15);
-		SCADModule2D rect1 = modules.rectCorners2D(cornerA, cornerB);
-		cornerB = Coord2D.vector2D(-20,-15);
-		SCADModule2D rect2 = modules.rectCorners2D(cornerA, cornerB);
-		Node2D union = core.getSCAD2D().union2D();
-		union.add(rect1).add(rect2);
+		Geometry3D unitCube = modules.unitCube3D();
+
+
+
+
 		//Output geometry
-		OpenSCAD.generateOutput(union);
+		OpenSCAD.generateOutput(unitCube);
 	}
 }

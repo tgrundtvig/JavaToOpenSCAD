@@ -1,9 +1,12 @@
 package org.abstractica.javatoopenscad.scad;
 
-import org.abstractica.javatoopenscad.scad.module.AArguments;
-import org.abstractica.javatoopenscad.scad.module.ArgumentCollector;
+import org.abstractica.javatoopenscad.scad.module.Arguments;
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentsImplementation;
 
-public class Coord2D extends AArguments
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
+import org.abstractica.javatoopenscad.scad.module.impl.ArgumentsImpl;
+
+public class Coord2D implements Arguments, ArgumentsImplementation
 {
 	public static final Coord2D ORIGO = new Coord2D(0,0,0, Angle.ZERO);
 
@@ -18,7 +21,7 @@ public class Coord2D extends AArguments
 		return new Coord2D(x, y, r, theta);
 	}
 
-	public static Coord2D vector(double x, double y)
+	public static Coord2D vector2D(double x, double y)
 	{
 		if(x == 0 && y == 0) return ORIGO;
 		double r = Math.sqrt(x*x + y*y);
@@ -27,12 +30,13 @@ public class Coord2D extends AArguments
 	}
 
 
-
+	private final ArgumentsImpl argImpl;
 	private final double x, y, r;
 	private final Angle theta;
 
 	private Coord2D(double x, double y, double r, Angle theta)
 	{
+		argImpl = new ArgumentsImpl(this);
 		this.x = x;
 		this.y = y;
 		this.r = r;
@@ -60,5 +64,17 @@ public class Coord2D extends AArguments
 	{
 		collector.add("x", x);
 		collector.add("y", y);
+	}
+
+	@Override
+	public String getClearText()
+	{
+		return argImpl.getClearText();
+	}
+
+	@Override
+	public int getUniqueId()
+	{
+		return argImpl.getUniqueId();
 	}
 }

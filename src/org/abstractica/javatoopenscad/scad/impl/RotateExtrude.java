@@ -1,11 +1,11 @@
 package org.abstractica.javatoopenscad.scad.impl;
 
 import org.abstractica.javatoopenscad.scad.Angle;
+import org.abstractica.javatoopenscad.scad.Node2DToGeometry3D;
 import org.abstractica.javatoopenscad.scad.scad2d.Geometry2D;
-import org.abstractica.javatoopenscad.scad.scad3d.Geometry3D;
 import org.abstractica.javatoopenscad.scad.impl.impl2d.ANode2D;
 
-public class RotateExtrude extends ANode2D implements Geometry3D
+public class RotateExtrude extends ANode2D implements Node2DToGeometry3D
 {
 	private final Geometry2D geometry2D;
 	private final Angle angle;

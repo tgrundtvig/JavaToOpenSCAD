@@ -1,4 +1,6 @@
-package org.abstractica.javatoopenscad.scad.module;
+package org.abstractica.javatoopenscad.scadmodules.impl;
+
+import org.abstractica.javatoopenscad.scad.module.Arguments;
 
 public interface ArgumentCollector
 {

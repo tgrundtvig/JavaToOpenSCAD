@@ -1,12 +1,18 @@
-package org.abstractica.javatoopenscad.scad.module;
+package org.abstractica.javatoopenscad.scad.module.impl;
 
-public abstract class AArguments implements Arguments
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
+import org.abstractica.javatoopenscad.scad.module.Arguments;
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentsImplementation;
+
+public class ArgumentsImpl implements Arguments
 {
+	private final ArgumentsImplementation impl;
 	private int uniqueId;
 	private String clearText;
 
-	public AArguments()
+	public ArgumentsImpl(ArgumentsImplementation impl)
 	{
+		this.impl = impl;
 		uniqueId = -1;
 		clearText = null;
 	}
@@ -18,6 +24,12 @@ public abstract class AArguments implements Arguments
 			generateUniqueIDAndClearText();
 		}
 		return uniqueId;
+	}
+
+	@Override
+	public void getArguments(ArgumentCollector collector)
+	{
+		impl.getArguments(collector);
 	}
 
 	public String getClearText()
@@ -32,9 +44,9 @@ public abstract class AArguments implements Arguments
 	private void generateUniqueIDAndClearText()
 	{
 		StringBuilder uniqueId = new StringBuilder();
-		uniqueId.append(AllStrings.id(getClass().getName()));
+		uniqueId.append(AllStrings.id(impl.getClass().getName()));
 		StringBuilder clearText = new StringBuilder();
-		clearText.append(getClass().getSimpleName());
+		clearText.append(impl.getClass().getSimpleName());
 		clearText.append("(");
 		ArgumentCollectorImpl collector = new ArgumentCollectorImpl(uniqueId, clearText);
 		getArguments(collector);

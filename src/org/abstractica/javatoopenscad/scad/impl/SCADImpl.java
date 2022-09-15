@@ -25,13 +25,13 @@ public class SCADImpl implements SCAD
 
 
 	@Override
-	public Geometry3D linearExtrude(Geometry2D geometry2D, double height, Angle twist, double scale, int slices, int convexity)
+	public Node2DToGeometry3D linearExtrude(Geometry2D geometry2D, double height, Angle twist, double scale, int slices, int convexity)
 	{
 		return new LinearExtrude(geometry2D, height, twist, scale, slices, convexity);
 	}
 
 	@Override
-	public Geometry3D rotateExtrude(Geometry2D geometry2D, Angle angle, int angularResolution, int convexity)
+	public Node2DToGeometry3D rotateExtrude(Geometry2D geometry2D, Angle angle, int angularResolution, int convexity)
 	{
 		return new RotateExtrude(geometry2D, angle, angularResolution, convexity);
 	}

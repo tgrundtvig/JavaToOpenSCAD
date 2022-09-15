@@ -1,8 +1,11 @@
-package org.abstractica.javatoopenscad.scad.module;
+package org.abstractica.javatoopenscad.scad.module.impl;
+
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
+import org.abstractica.javatoopenscad.scad.module.Arguments;
 
 import java.util.Locale;
 
-class ArgumentCollectorImpl implements ArgumentCollector
+public class ArgumentCollectorImpl implements ArgumentCollector
 {
 	private final StringBuilder uniqueId;
 	private final StringBuilder clearText;

@@ -3,14 +3,13 @@ package org.abstractica.javatoopenscad.scad.impl.impl3d;
 import org.abstractica.javatoopenscad.scad.Geometry;
 import org.abstractica.javatoopenscad.scad.scad3d.Geometry3D;
 import org.abstractica.javatoopenscad.scad.scad3d.Node3D;
-import org.abstractica.javatoopenscad.scad.impl.AGeometry;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class ANode3D extends AGeometry implements Node3D
+public abstract class ANode3D implements Node3D
 {
 	private final List<Geometry> children;
 

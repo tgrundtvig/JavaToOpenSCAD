@@ -3,13 +3,12 @@ package org.abstractica.javatoopenscad.scad.impl.impl2d;
 import org.abstractica.javatoopenscad.scad.Coord2D;
 import org.abstractica.javatoopenscad.scad.scad2d.Geometry2D;
 import org.abstractica.javatoopenscad.scad.scad2d.Path2D;
-import org.abstractica.javatoopenscad.scad.impl.AGeometry;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Polygon2D extends AGeometry implements Geometry2D
+public class Polygon2D implements Geometry2D
 {
 	private final List<Coord2D> vertices;
 	private final List<Path2D> paths;

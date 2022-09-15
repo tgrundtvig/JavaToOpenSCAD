@@ -14,11 +14,11 @@ public interface SCAD
 	Geometry2D project(Geometry3D geometry3D, boolean cut);
 
 	//2D to 3D operations
-	Geometry3D linearExtrude(Geometry2D geometry2D,
+	Node2DToGeometry3D linearExtrude(Geometry2D geometry2D,
 	                         double height,
 	                         Angle twist,
 	                         double scale,
 	                         int slices,
 	                         int convexity);
-	Geometry3D rotateExtrude(Geometry2D geometry2D, Angle angle, int angularResolution, int convexity);
+	Node2DToGeometry3D rotateExtrude(Geometry2D geometry2D, Angle angle, int angularResolution, int convexity);
 }

@@ -1,18 +1,13 @@
-package org.abstractica.javatoopenscad.modules.impl;
+package org.abstractica.javatoopenscad.scadmodules.modules2D;
 
-import org.abstractica.javatoopenscad.modules.Modules;
-import org.abstractica.javatoopenscad.scad.Coord2D;
+import org.abstractica.javatoopenscad.scadmodules.SCADModules;
 import org.abstractica.javatoopenscad.scad.SCAD;
 import org.abstractica.javatoopenscad.scad.Geometry;
-import org.abstractica.javatoopenscad.scad.module.AModule;
-import org.abstractica.javatoopenscad.scad.module.ArgumentCollector;
-import org.abstractica.javatoopenscad.scad.scad2d.Geometry2D;
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
 import org.abstractica.javatoopenscad.scad.scad2d.Node2D;
+import org.abstractica.javatoopenscad.scadmodules.impl.SCADModule2DImplementation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class RectCenter2D extends AModule implements Geometry2D
+public class RectCenter2D implements SCADModule2DImplementation
 {
 	public final double width;
 	public final double height;
@@ -31,9 +26,8 @@ public class RectCenter2D extends AModule implements Geometry2D
 	}
 
 	@Override
-	public Geometry generateDisplayGeometry(SCAD scad, Modules modules)
+	public Geometry generateDisplayGeometry(SCAD scad, SCADModules modules)
 	{
-
 		Node2D scale = scad.getSCAD2D().scale2D(width, height);
 		return scale.add(modules.unitSquare2D());
 	}

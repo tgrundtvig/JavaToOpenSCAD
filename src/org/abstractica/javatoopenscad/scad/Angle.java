@@ -1,10 +1,12 @@
 package org.abstractica.javatoopenscad.scad;
 
-import org.abstractica.javatoopenscad.scad.module.AArguments;
-import org.abstractica.javatoopenscad.scad.module.ArgumentCollector;
+import org.abstractica.javatoopenscad.scad.module.Arguments;
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentsImplementation;
+import org.abstractica.javatoopenscad.scad.module.impl.ArgumentsImpl;
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
 import org.abstractica.javatoopenscad.util.Str;
 
-public class Angle extends AArguments
+public class Angle implements Arguments, ArgumentsImplementation
 {
 	//Static helpers
 	public static final Angle ZERO = rot(0);
@@ -61,10 +63,12 @@ public class Angle extends AArguments
 
 
 	//Non-static
+	private final ArgumentsImpl argumentsImpl;
 	private final double rotations;
 
 	private Angle(double rotations)
 	{
+		this.argumentsImpl = new ArgumentsImpl(this);
 		while(rotations <= -0.5)
 		{
 			++rotations;
@@ -103,5 +107,17 @@ public class Angle extends AArguments
 	public void getArguments(ArgumentCollector collector)
 	{
 		collector.add("deg", Double.toString(asDegrees()));
+	}
+
+	@Override
+	public String getClearText()
+	{
+		return argumentsImpl.getClearText();
+	}
+
+	@Override
+	public int getUniqueId()
+	{
+		return argumentsImpl.getUniqueId();
 	}
 }

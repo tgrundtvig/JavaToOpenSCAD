@@ -1,10 +1,12 @@
 package org.abstractica.javatoopenscad.scad.impl;
 
 
-import org.abstractica.javatoopenscad.scad.module.AArguments;
-import org.abstractica.javatoopenscad.scad.module.ArgumentCollector;
+import org.abstractica.javatoopenscad.scad.module.Arguments;
+import org.abstractica.javatoopenscad.scad.module.impl.ArgumentsImpl;
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
+import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentsImplementation;
 
-public class Color extends AArguments
+public class Color implements Arguments, ArgumentsImplementation
 {
 	public static final Color RED = new Color(1,0,0,1);
 	public static Color create(double r, double g, double b, double a)
@@ -16,10 +18,13 @@ public class Color extends AArguments
 	{
 		return new Color(r,g,b,1);
 	}
+
+	private final ArgumentsImpl argImpl;
 	private final double r, g, b, a;
 
 	private Color(double r, double g, double b, double a)
 	{
+		this.argImpl = new ArgumentsImpl(this);
 		this.r = r;
 		this.g = g;
 		this.b = b;
@@ -61,5 +66,17 @@ public class Color extends AArguments
 		collector.add("g", g);
 		collector.add("b", b);
 		collector.add("a", a);
+	}
+
+	@Override
+	public String getClearText()
+	{
+		return argImpl.getClearText();
+	}
+
+	@Override
+	public int getUniqueId()
+	{
+		return argImpl.getUniqueId();
 	}
 }
