@@ -1,7 +1,8 @@
 package org.abstractica.javatoopenscad.scad.scad2d;
 
 import org.abstractica.javatoopenscad.scad.Angle;
-import org.abstractica.javatoopenscad.scad.Color;
+import org.abstractica.javatoopenscad.scad.Coord2D;
+import org.abstractica.javatoopenscad.scad.impl.Color;
 
 public interface SCAD2D
 {

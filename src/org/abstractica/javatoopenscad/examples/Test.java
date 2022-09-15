@@ -1,8 +1,8 @@
 package org.abstractica.javatoopenscad.examples;
 
 import org.abstractica.javatoopenscad.scad.Angle;
+import org.abstractica.javatoopenscad.scad.Coord2D;
 import org.abstractica.javatoopenscad.scad.SCAD;
-import org.abstractica.javatoopenscad.scad.scad2d.Coord2D;
 import org.abstractica.javatoopenscad.scad.scad2d.Geometry2D;
 import org.abstractica.javatoopenscad.scad.impl.SCADImpl;
 import org.abstractica.javatoopenscad.generators.openscad.OpenSCAD;

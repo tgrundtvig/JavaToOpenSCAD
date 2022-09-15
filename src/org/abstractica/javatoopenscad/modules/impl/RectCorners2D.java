@@ -1,14 +1,15 @@
 package org.abstractica.javatoopenscad.modules.impl;
 
+import org.abstractica.javatoopenscad.scad.Coord2D;
 import org.abstractica.javatoopenscad.scad.SCAD;
 import org.abstractica.javatoopenscad.scad.Geometry;
-import org.abstractica.javatoopenscad.scad.scad2d.Coord2D;
+import org.abstractica.javatoopenscad.scad.module.AModule;
+import org.abstractica.javatoopenscad.scad.module.ArgumentCollector;
+import org.abstractica.javatoopenscad.scad.scad2d.Geometry2D;
 import org.abstractica.javatoopenscad.scad.scad2d.Node2D;
-import org.abstractica.javatoopenscad.scad.scad2d.Vector2D;
-import org.abstractica.javatoopenscad.scad.impl.AModule;
 import org.abstractica.javatoopenscad.modules.Modules;
 
-public class RectCorners2D extends AModule
+public class RectCorners2D extends AModule implements Geometry2D
 {
 	public final Coord2D cornerA;
 	public final Coord2D cornerB;
@@ -20,23 +21,21 @@ public class RectCorners2D extends AModule
 	}
 
 	@Override
-	public void getParameters(ParameterCollector collector)
+	public void getArguments(ArgumentCollector collector)
 	{
-		collector.add("cornerA", cornerA.asVector2D());
-		collector.add("cornerB", cornerB.asVector2D());
+		collector.add("cornerA", cornerA);
+		collector.add("cornerB", cornerB);
 	}
 
 	@Override
-	public Geometry generateGeometry(SCAD scad)
+	public Geometry generateDisplayGeometry(SCAD scad, Modules modules)
 	{
-		Vector2D a = cornerA.asVector2D();
-		Vector2D b = cornerB.asVector2D();
-		double width = Math.abs(a.x()- b.x());
-		double height = Math.abs(a.y() - b.y());
-		double x = 0.5*(a.x()+b.x());
-		double y = 0.5*(a.y()+b.y());
+		double width = Math.abs(cornerA.x()- cornerB.x());
+		double height = Math.abs(cornerA.y() - cornerB.y());
+		double x = 0.5*(cornerA.x()+cornerB.x());
+		double y = 0.5*(cornerA.y()+cornerB.y());
 		Node2D translate = scad.getSCAD2D().translate2D(Coord2D.vector(x,y));
-		translate.add(Modules.rectCenter2D(width, height));
+		translate.add(modules.rectCenter2D(width, height));
 		return translate;
 	}
 }

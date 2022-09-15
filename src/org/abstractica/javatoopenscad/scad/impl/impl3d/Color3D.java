@@ -1,6 +1,6 @@
 package org.abstractica.javatoopenscad.scad.impl.impl3d;
 
-import org.abstractica.javatoopenscad.scad.Color;
+import org.abstractica.javatoopenscad.scad.impl.Color;
 
 public class Color3D extends ANode3D
 {

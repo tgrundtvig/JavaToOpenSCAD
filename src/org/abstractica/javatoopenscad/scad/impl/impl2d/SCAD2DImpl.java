@@ -1,7 +1,8 @@
 package org.abstractica.javatoopenscad.scad.impl.impl2d;
 
 import org.abstractica.javatoopenscad.scad.Angle;
-import org.abstractica.javatoopenscad.scad.Color;
+import org.abstractica.javatoopenscad.scad.Coord2D;
+import org.abstractica.javatoopenscad.scad.impl.Color;
 import org.abstractica.javatoopenscad.scad.scad2d.*;
 
 import java.util.ArrayList;
@@ -61,8 +62,7 @@ public class SCAD2DImpl implements SCAD2D
 	@Override
 	public Node2D mirror2D(Coord2D normal)
 	{
-		Vector2D norm = normal.asVector2D();
-		return new Mirror2D(norm.x(), norm.y());
+		return new Mirror2D(normal.x(), normal.y());
 	}
 
 	@Override

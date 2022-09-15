@@ -1,7 +1,7 @@
 package org.abstractica.javatoopenscad.scad.impl.impl3d;
 
 import org.abstractica.javatoopenscad.scad.Angle;
-import org.abstractica.javatoopenscad.scad.Color;
+import org.abstractica.javatoopenscad.scad.impl.Color;
 import org.abstractica.javatoopenscad.scad.scad3d.*;
 
 public class SCAD3DImpl implements SCAD3D
