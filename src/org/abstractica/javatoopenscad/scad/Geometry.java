@@ -1,3 +1,4 @@
 package org.abstractica.javatoopenscad.scad;
 
-public interface Geometry {}
+public interface Geometry
+{}

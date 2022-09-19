@@ -1,5 +1,6 @@
 package org.abstractica.javatoopenscad.scad.module.impl;
 
+import refactoring.core.AllStrings;
 import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
 import org.abstractica.javatoopenscad.scad.module.Arguments;
 

@@ -1,7 +1,6 @@
 package org.abstractica.javatoopenscad.scad.scad2d;
 
 import org.abstractica.javatoopenscad.scad.Angle;
-import org.abstractica.javatoopenscad.scad.Coord2D;
 import org.abstractica.javatoopenscad.scad.impl.Color;
 
 public interface SCAD2D
@@ -10,6 +9,8 @@ public interface SCAD2D
 	Node2D rotate2D(Angle x, Angle y, Angle z);
 	Node2D rotate2D(Angle angle);
 	Node2D scale2D(double xFactor, double yFactor);
+	Node2D offset2D(double delta, boolean chamfer);
+	Node2D offsetRound2D(double radius, int angularResolution);
 	Node2D mirror2D(Coord2D normal);
 	Node2D union2D();
 	Node2D intersection2D();

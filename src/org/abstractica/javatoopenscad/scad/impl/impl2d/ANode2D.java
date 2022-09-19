@@ -11,6 +11,7 @@ import java.util.List;
 
 public abstract class ANode2D implements Node2D
 {
+
 	private final List<Geometry> children;
 
 	public ANode2D()

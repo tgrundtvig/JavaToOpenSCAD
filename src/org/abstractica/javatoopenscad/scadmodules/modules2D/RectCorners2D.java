@@ -1,6 +1,6 @@
 package org.abstractica.javatoopenscad.scadmodules.modules2D;
 
-import org.abstractica.javatoopenscad.scad.Coord2D;
+import org.abstractica.javatoopenscad.scad.scad2d.Coord2D;
 import org.abstractica.javatoopenscad.scad.SCAD;
 import org.abstractica.javatoopenscad.scad.Geometry;
 import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
@@ -34,7 +34,7 @@ public class RectCorners2D implements SCADModule2DImplementation
 		double x = 0.5*(cornerA.x()+cornerB.x());
 		double y = 0.5*(cornerA.y()+cornerB.y());
 		Node2D translate = scad.getSCAD2D().translate2D(Coord2D.vector2D(x,y));
-		translate.add(modules.rectCenter2D(width, height));
+		translate.add(modules.rect2D(width, height));
 		return translate;
 	}
 }

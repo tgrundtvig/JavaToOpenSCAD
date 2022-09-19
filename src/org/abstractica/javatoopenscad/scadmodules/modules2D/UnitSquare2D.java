@@ -1,7 +1,7 @@
 package org.abstractica.javatoopenscad.scadmodules.modules2D;
 
 import org.abstractica.javatoopenscad.scadmodules.SCADModules;
-import org.abstractica.javatoopenscad.scad.Coord2D;
+import org.abstractica.javatoopenscad.scad.scad2d.Coord2D;
 import org.abstractica.javatoopenscad.scad.Geometry;
 import org.abstractica.javatoopenscad.scad.SCAD;
 import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;

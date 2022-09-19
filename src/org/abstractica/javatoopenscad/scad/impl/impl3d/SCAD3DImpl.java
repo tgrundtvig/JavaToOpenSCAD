@@ -27,8 +27,7 @@ public class SCAD3DImpl implements SCAD3D
 	@Override
 	public Node3D mirror3D(Coord3D normal)
 	{
-		Vector3D norm = normal.asVector3D();
-		return new Mirror3D(norm.x(), norm.y(), norm.z());
+		return new Mirror3D(normal.x(), normal.y(), normal.z());
 	}
 
 	@Override

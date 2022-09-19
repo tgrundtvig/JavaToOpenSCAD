@@ -1,7 +1,7 @@
 package org.abstractica.javatoopenscad.scad.impl.impl2d;
 
 import org.abstractica.javatoopenscad.scad.Angle;
-import org.abstractica.javatoopenscad.scad.Coord2D;
+import org.abstractica.javatoopenscad.scad.scad2d.Coord2D;
 import org.abstractica.javatoopenscad.scad.impl.Color;
 import org.abstractica.javatoopenscad.scad.scad2d.*;
 
@@ -57,6 +57,18 @@ public class SCAD2DImpl implements SCAD2D
 	public Node2D scale2D(double xFactor, double yFactor)
 	{
 		return new Scale2D(xFactor, yFactor);
+	}
+
+	@Override
+	public Node2D offset2D(double delta, boolean chamfer)
+	{
+		return new Offset2D(delta, chamfer);
+	}
+
+	@Override
+	public Node2D offsetRound2D(double radius, int angularResolution)
+	{
+		return new OffsetRound2D(radius, angularResolution);
 	}
 
 	@Override

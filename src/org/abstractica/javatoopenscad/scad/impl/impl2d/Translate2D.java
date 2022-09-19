@@ -1,6 +1,6 @@
 package org.abstractica.javatoopenscad.scad.impl.impl2d;
 
-import org.abstractica.javatoopenscad.scad.Coord2D;
+import org.abstractica.javatoopenscad.scad.scad2d.Coord2D;
 
 public class Translate2D extends ANode2D
 {

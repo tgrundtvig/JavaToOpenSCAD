@@ -5,7 +5,6 @@ import org.abstractica.javatoopenscad.scad.Geometry;
 import org.abstractica.javatoopenscad.scad.SCAD;
 import org.abstractica.javatoopenscad.scad.module.SCADModule2D;
 import org.abstractica.javatoopenscad.scad.scad2d.Node2D;
-import org.abstractica.javatoopenscad.scad.scad3d.Node3D;
 import org.abstractica.javatoopenscad.scadmodules.SCADModules;
 import org.abstractica.javatoopenscad.scadmodules.impl.ArgumentCollector;
 import org.abstractica.javatoopenscad.scadmodules.impl.SCADModule3DImplementation;
