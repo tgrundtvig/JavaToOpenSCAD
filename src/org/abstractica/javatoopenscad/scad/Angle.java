@@ -99,7 +99,7 @@ public class Angle implements Arguments, ArgumentsImplementation
 	{
 		String deg = Str.f(asDegrees(),0);
 		String rotp = Str.f(asRotations()*100,0);
-		return "Angle(deg: " + deg +
+		return "AngleImpl(deg: " + deg +
 				", %rot: " + rotp + ")";
 	}
 
