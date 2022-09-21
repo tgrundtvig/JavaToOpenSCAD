@@ -3,6 +3,8 @@ package org.abstractica.javatoopenscad.tests;
 import org.abstractica.javatoopenscad.coreimpl.core.*;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
 import org.abstractica.javatoopenscad.csg.csg2d.Arrange2D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;

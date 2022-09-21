@@ -3,7 +3,7 @@ package org.abstractica.javatoopenscad.modulesimpl.csg2d.shapes2d;
 
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
-import org.abstractica.javatoopenscad.coreimpl.core.Module2D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;

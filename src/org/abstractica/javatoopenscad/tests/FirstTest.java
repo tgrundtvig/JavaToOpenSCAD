@@ -4,7 +4,7 @@ import org.abstractica.javatoopenscad.coreimpl.codebuilder.CodeBuilder;
 import org.abstractica.javatoopenscad.coreimpl.codebuilder.impl.CodeBuilderImpl;
 import org.abstractica.javatoopenscad.coreimpl.codebuilder.textoutput.TextOutput;
 import org.abstractica.javatoopenscad.coreimpl.codebuilder.textoutput.impl.StringBuilderTextOutput;
-import org.abstractica.javatoopenscad.coreimpl.core.Module2DFrom2D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
 import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;

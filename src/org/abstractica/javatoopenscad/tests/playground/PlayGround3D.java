@@ -1,7 +1,7 @@
 package org.abstractica.javatoopenscad.tests.playground;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
-import org.abstractica.javatoopenscad.coreimpl.core.Module3D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
 import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;

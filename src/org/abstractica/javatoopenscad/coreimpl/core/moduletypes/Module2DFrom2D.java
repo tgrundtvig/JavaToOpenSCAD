@@ -1,4 +1,4 @@
-package org.abstractica.javatoopenscad.coreimpl.core;
+package org.abstractica.javatoopenscad.coreimpl.core.moduletypes;
 
 public interface Module2DFrom2D extends Module2D
 {

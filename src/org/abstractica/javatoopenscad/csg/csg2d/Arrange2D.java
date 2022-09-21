@@ -1,7 +1,7 @@
 package org.abstractica.javatoopenscad.csg.csg2d;
 
-import org.abstractica.javatoopenscad.coreimpl.core.Module2D;
-import org.abstractica.javatoopenscad.coreimpl.core.Module2DFrom2D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
 
 public interface Arrange2D
 {

@@ -1,6 +1,6 @@
 package org.abstractica.javatoopenscad.csg.csg2d;
 
-import org.abstractica.javatoopenscad.coreimpl.core.Module2D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 
 public interface Shapes2D
 {

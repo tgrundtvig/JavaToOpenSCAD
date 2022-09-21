@@ -1,7 +1,7 @@
 package org.abstractica.javatoopenscad.csg.csg3d;
 
-import org.abstractica.javatoopenscad.coreimpl.core.Module3DFrom2D;
-import org.abstractica.javatoopenscad.coreimpl.core.Module3DFrom3D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom2D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
 import org.abstractica.javatoopenscad.csg.Angle;
 
 public interface Construct3D

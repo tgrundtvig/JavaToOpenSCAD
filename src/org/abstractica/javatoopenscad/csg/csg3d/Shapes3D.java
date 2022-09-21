@@ -1,6 +1,6 @@
 package org.abstractica.javatoopenscad.csg.csg3d;
 
-import org.abstractica.javatoopenscad.coreimpl.core.Module3D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 
 public interface Shapes3D
 {
