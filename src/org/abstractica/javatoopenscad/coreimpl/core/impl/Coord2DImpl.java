@@ -2,9 +2,9 @@ package org.abstractica.javatoopenscad.coreimpl.core.impl;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.HasArguments;
-import org.abstractica.javatoopenscad.modules.modulesintf.math.Angle;
-import org.abstractica.javatoopenscad.modules.modulesintf.math.Polar2D;
-import org.abstractica.javatoopenscad.modules.modulesintf.math.Vector2D;
+import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.csg2d.Polar2D;
+import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
 
 public class Coord2DImpl implements Vector2D, Polar2D, HasArguments
 {

@@ -3,8 +3,8 @@ package org.abstractica.javatoopenscad.coreimpl.core.impl;
 import org.abstractica.javatoopenscad.coreimpl.codebuilder.CodeBuilder;
 import org.abstractica.javatoopenscad.coreimpl.codebuilder.blockbuilder.BlockBuilder;
 import org.abstractica.javatoopenscad.coreimpl.core.*;
-import org.abstractica.javatoopenscad.modules.modulesimpl.plugininterfaces.*;
-import org.abstractica.javatoopenscad.modules.modulesintf.CSG;
+import org.abstractica.javatoopenscad.csg.CSG;
+import org.abstractica.javatoopenscad.plugininterfaces.*;
 
 import java.util.ArrayList;
 import java.util.List;

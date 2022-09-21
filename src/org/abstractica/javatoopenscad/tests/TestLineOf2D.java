@@ -5,12 +5,11 @@ import org.abstractica.javatoopenscad.coreimpl.core.Module2D;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
 import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
-import org.abstractica.javatoopenscad.modules.modulesimpl.CSGImpl;
-import org.abstractica.javatoopenscad.modules.modulesimpl.plugininterfaces.Module2DImpl;
-import org.abstractica.javatoopenscad.modules.modulesintf.CSG;
-import org.abstractica.javatoopenscad.modules.modulesintf.csg2d.CSG2D;
-import org.abstractica.javatoopenscad.modules.modulesintf.csg2d.g2d.G2D;
-import org.abstractica.javatoopenscad.modules.modulesintf.csg2d.g2dfrom2d.G2DFrom2D;
+import org.abstractica.javatoopenscad.csg.csg2d.Arrange2D;
+import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
+import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
+import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;
+import org.abstractica.javatoopenscad.csg.CSG;
 
 import java.io.IOException;
 
@@ -23,12 +22,11 @@ public class TestLineOf2D implements Module2DImpl
 	public Module2D buildGeometry(CSG csg)
 	{
 		//Get shortcuts to the api's you want to use:
-		CSG2D csg2D = csg.csg2D();
-		G2D g2D = csg2D.g2D();
-		G2DFrom2D g2D2D = csg2D.g2DFrom2D();
+		Shapes2D s2D = csg.csg2D().shapes2D();
+		Arrange2D a2D = csg.csg2D().arrange2D();
 
-		Module2D rect = g2D.rect2D(10, 20);
-		return g2D.lineOfModule2D(rect, 4, 20);
+		Module2D rect = s2D.rect2D(10, 20);
+		return a2D.lineOfModule2D(rect, 4, 20);
 	}
 
 

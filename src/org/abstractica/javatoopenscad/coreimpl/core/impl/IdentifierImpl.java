@@ -2,11 +2,15 @@ package org.abstractica.javatoopenscad.coreimpl.core.impl;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
-import org.abstractica.javatoopenscad.modules.modulesintf.math.*;
+import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.csg2d.Polar2D;
+import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.javatoopenscad.csg.csg3d.Polar3D;
+import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
 import org.abstractica.javatoopenscad.coreimpl.core.HasArguments;
 import org.abstractica.javatoopenscad.coreimpl.core.Identifier;
-import org.abstractica.javatoopenscad.modules.modulesimpl.builtin.polygon2d.Polygon2D;
-import org.abstractica.javatoopenscad.modules.modulesintf.csg2d.g2d.polygons.Path2D;
+import org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.polygon2d.Polygon2D;
+import org.abstractica.javatoopenscad.csg.csg2d.Path2D;
 
 import java.util.List;
 import java.util.Locale;

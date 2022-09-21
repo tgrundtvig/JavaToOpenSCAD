@@ -1,7 +1,7 @@
 package org.abstractica.javatoopenscad.coreimpl.core.impl;
 
 import org.abstractica.javatoopenscad.coreimpl.core.*;
-import org.abstractica.javatoopenscad.modules.modulesimpl.plugininterfaces.*;
+import org.abstractica.javatoopenscad.plugininterfaces.*;
 
 public class AModuleFactory implements ModuleFactory
 {
