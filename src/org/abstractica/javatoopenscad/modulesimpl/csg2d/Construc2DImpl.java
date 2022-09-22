@@ -134,6 +134,12 @@ public class Construc2DImpl extends AModuleFactory implements Construct2D
 	}
 
 	@Override
+	public Module2DFrom2D minkowsky2D()
+	{
+		return module2DFrom2D(Minkowsky.instance);
+	}
+
+	@Override
 	public Module2DFrom2D offset2D(double delta, boolean chamfer)
 	{
 		return module2DFrom2D(new Offset2D(delta, chamfer));

@@ -1,4 +1,4 @@
-package org.abstractica.javatoopenscad.modulesimpl.csg2d.text2d;
+package org.abstractica.javatoopenscad.modulesimpl.common;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.HasArguments;

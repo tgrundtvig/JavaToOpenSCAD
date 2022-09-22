@@ -26,11 +26,12 @@ public class TestCircleOfModules2D implements Module2DImpl
 
 		Module2D rect = s2D.rect2D(20, 10);
 		Module2D circle = s2D.circle2D(20, 3);
-		Module2DFrom2D circleOfModules =  a2D.circleOfModules2D(30, false);
+		Module2DFrom2D circleOfModules =  a2D.circleOfModules2D(30, true);
 		for(int i = 0; i < 4; ++i)
 		{
 			circleOfModules.add(rect);
 			circleOfModules.add(circle);
+			if(i == 2) rect.debugMark();
 		}
 		return circleOfModules;
 	}

@@ -62,7 +62,9 @@ public class IdentifierImpl implements ArgumentCollector, Identifier
 	@Override
 	public void add(String name, double d)
 	{
-		uniqueId.append("d").append(AllStrings.id(Double.toString(d)));
+		if(Math.abs(d) < 0.0000000001) d = 0.0;
+		String doubleString = String.format(Locale.ENGLISH,"%.10f", d);
+		uniqueId.append("d").append(AllStrings.id(doubleString));
 		prefix(name);
 		clearText.append(d(d));
 	}

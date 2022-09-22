@@ -42,7 +42,9 @@ public interface Construct2D
 	//Hull
 	Module2DFrom2D hull2D();
 
-	//ToDo minkowski
+	//Minkowski
+	Module2DFrom2D minkowsky2D();
+
 	//ToDo project
 
 	//Offset

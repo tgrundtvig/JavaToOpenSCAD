@@ -19,6 +19,7 @@ public interface Construct3D
 	Module3DFrom3D intersection3D();
 	Module3DFrom3D difference3D();
 	Module3DFrom3D hull3D();
+	Module3DFrom3D minkowsky3D();
 	// Linear extrude
 	Module3DFrom2D linearExtrude(double height, Angle twist, double scale, int slices, int convexity);
 	Module3DFrom2D linearExtrude(double height, int convexity);

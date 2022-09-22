@@ -18,14 +18,15 @@ import java.util.Map;
 
 public class OpenSCADModuleImpl implements Module2D, Module3D
 {
-	private final M2DFrom2DImpl asM2DFrom2D;
-	private final M2DFrom3DImpl asM2DFrom3D;
-	private final M3DFrom2DImpl asM3DFrom2D;
-	private final M3DFrom3DImpl asM3DFrom3D;
+	private final M2DFrom2D asM2DFrom2D;
+	private final M2DFrom3D asM2DFrom3D;
+	private final M3DFrom2D asM3DFrom2D;
+	private final M3DFrom3D asM3DFrom3D;
 	private final CSG csg;
 	private final Identifier id;
 	private final PluginModule plugin;
 	private ArrayList<OpenSCADModule> children;
+	private boolean debugMarked;
 
 	public OpenSCADModuleImpl(CSG csg, Identifier identifier, PluginModule plugin)
 	{
@@ -33,10 +34,11 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 		this.id = identifier;
 		this.plugin = plugin;
 		this.children = null;
-		asM2DFrom2D = new M2DFrom2DImpl();
-		asM2DFrom3D = new M2DFrom3DImpl();
-		asM3DFrom2D = new M3DFrom2DImpl();
-		asM3DFrom3D = new M3DFrom3DImpl();
+		asM2DFrom2D = new M2DFrom2D();
+		asM2DFrom3D = new M2DFrom3D();
+		asM3DFrom2D = new M3DFrom2D();
+		asM3DFrom3D = new M3DFrom3D();
+		debugMarked = false;
 	}
 
 	@Override
@@ -46,36 +48,46 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 	}
 
 	@Override
+	public void debugMark()
+	{
+		debugMarked = true;
+	}
+
+	@Override
 	public void generateCall(CodeBuilder cb, Map<Integer, OpenSCADModule> usedModules)
 	{
 		cb.print("// ");
 		cb.println(id.getSimpeNameWithArguments());
+		if(debugMarked)
+		{
+			cb.print("#");
+		}
 		if(plugin instanceof BuiltInModule)
 		{
 			BuiltInModule builtIn = (BuiltInModule) plugin;
 			builtIn.getCallHeader(cb);
+			if(children == null)
+			{
+				cb.println(";");
+			}
+			else
+			{
+				BlockBuilder childBlock = cb.block();
+				for(OpenSCADModule child : children)
+				{
+					child.generateCall(childBlock, usedModules);
+				}
+				childBlock.endBlock();
+			}
 		}
 		else
 		{
+			usedModules.put(id.getUniqueId(), this);
 			cb.print("M");
 			cb.print(Integer.toString(id.getUniqueId()));
 			cb.list().end(); // ()
-			usedModules.put(id.getUniqueId(), this);
-		}
-		if(children == null)
-		{
 			cb.println(";");
 		}
-		else
-		{
-			BlockBuilder childBlock = cb.block();
-			for(OpenSCADModule child : children)
-			{
-				child.generateCall(childBlock, usedModules);
-			}
-			childBlock.endBlock();
-		}
-
 	}
 
 	@Override
@@ -206,6 +218,12 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 		}
 
 		@Override
+		public void debugMark()
+		{
+			OpenSCADModuleImpl.this.debugMark();
+		}
+
+		@Override
 		public void generateCall(CodeBuilder cb, Map<Integer, OpenSCADModule> usedModules)
 		{
 			OpenSCADModuleImpl.this.generateCall(cb, usedModules);
@@ -219,7 +237,7 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 	}
 
 
-	private class M2DFrom2DImpl extends ModuleXFromX implements Module2DFrom2D
+	private class M2DFrom2D extends ModuleXFromX implements Module2DFrom2D
 	{
 		@Override
 		public Module2DFrom2D add(Module2D child)
@@ -229,7 +247,7 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 		}
 	}
 
-	private class M2DFrom3DImpl extends ModuleXFromX implements Module2DFrom3D
+	private class M2DFrom3D extends ModuleXFromX implements Module2DFrom3D
 	{
 
 		@Override
@@ -240,7 +258,7 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 		}
 	}
 
-	private class M3DFrom2DImpl extends ModuleXFromX implements Module3DFrom2D
+	private class M3DFrom2D extends ModuleXFromX implements Module3DFrom2D
 	{
 		@Override
 		public Module3DFrom2D add(Module2D child)
@@ -250,7 +268,7 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 		}
 	}
 
-	private class M3DFrom3DImpl extends ModuleXFromX implements Module3DFrom3D
+	private class M3DFrom3D extends ModuleXFromX implements Module3DFrom3D
 	{
 		@Override
 		public Module3DFrom3D add(Module3D child)

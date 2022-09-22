@@ -24,7 +24,8 @@ public class CircleOfModules2D implements Module2DFrom2DImpl
 	@Override
 	public void getArguments(ArgumentCollector collector)
 	{
-
+		collector.add("radius", radius);
+		collector.add("rotateChildren", rotateChildren);
 	}
 
 	@Override

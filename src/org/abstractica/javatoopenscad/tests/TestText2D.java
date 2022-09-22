@@ -7,9 +7,9 @@ import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
 import org.abstractica.javatoopenscad.csg.*;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
-import org.abstractica.javatoopenscad.modulesimpl.csg2d.text2d.TextAlignment;
-import org.abstractica.javatoopenscad.modulesimpl.csg2d.text2d.TextFont;
-import org.abstractica.javatoopenscad.modulesimpl.csg2d.text2d.TextSize;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextAlignment;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextFont;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextSize;
 import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;
 import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
 
@@ -26,13 +26,15 @@ public class TestText2D implements Module2DImpl
 		//Get shortcuts to the api's you want to use:
 		CSG2D csg2D = csg.csg2D();
 
-		TextFont font = CSGText.textFont("Consolas", "Regular");
-		TextSize size = CSGText.textSize(25.4, 1);
+		//TextFont font = CSGText.textFont("Consolas", "Regular");
+		TextFont font = CSGText.textFont("Courier New", "Regular");
+		TextSize size = CSGText.textSize(10/0.7, 1);
 		TextAlignment alignment = CSGText.textAlignment(
 				TextHAlign.CENTER,
 				TextVAlign.CENTER,
 				TextDirection.LEFT_TO_RIGHT);
-		return csg2D.text2D().text("Hello world!", font, size, alignment, 64);
+		return csg2D.text2D().textLineup("Hello world!", 10, font, size, 16);
+		//return csg2D.text2D().text("Hello world!", font, size, alignment, 64);
 	}
 
 

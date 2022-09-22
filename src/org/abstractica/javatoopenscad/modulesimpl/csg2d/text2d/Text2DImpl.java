@@ -6,8 +6,11 @@ import org.abstractica.javatoopenscad.coreimpl.core.BuiltInModule;
 import org.abstractica.javatoopenscad.csg.TextDirection;
 import org.abstractica.javatoopenscad.csg.TextHAlign;
 import org.abstractica.javatoopenscad.csg.TextVAlign;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextAlignment;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextFont;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextSize;
 
-public class Text2D implements BuiltInModule
+public class Text2DImpl implements BuiltInModule
 {
 	private final String text;
 	private final TextFont font;
@@ -15,7 +18,7 @@ public class Text2D implements BuiltInModule
 	private final TextAlignment alignment;
 	private final int resolution;
 
-	public Text2D(String text, TextFont font, TextSize size, TextAlignment alignment, int resolution)
+	public Text2DImpl(String text, TextFont font, TextSize size, TextAlignment alignment, int resolution)
 	{
 		this.text = text;
 		this.font = font;

@@ -99,6 +99,12 @@ public class Construct3DImpl extends AModuleFactory implements Construct3D
 	}
 
 	@Override
+	public Module3DFrom3D minkowsky3D()
+	{
+		return module3DFrom3D(Minkowsky.instance);
+	}
+
+	@Override
 	public Module3DFrom2D linearExtrude(double height, Angle twist, double scale, int slices, int convexity)
 	{
 		return module3DFrom2D(new LinearExtrude(height, twist, scale, slices, convexity));

@@ -1,8 +1,8 @@
 package org.abstractica.javatoopenscad.csg;
 
-import org.abstractica.javatoopenscad.modulesimpl.csg2d.text2d.TextAlignment;
-import org.abstractica.javatoopenscad.modulesimpl.csg2d.text2d.TextFont;
-import org.abstractica.javatoopenscad.modulesimpl.csg2d.text2d.TextSize;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextAlignment;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextFont;
+import org.abstractica.javatoopenscad.modulesimpl.common.TextSize;
 
 public interface CSGText
 {
