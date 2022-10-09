@@ -6,24 +6,18 @@ import org.abstractica.javatoopenscad.coreimpl.core.BuiltInModule;
 import org.abstractica.javatoopenscad.csg.TextDirection;
 import org.abstractica.javatoopenscad.csg.TextHAlign;
 import org.abstractica.javatoopenscad.csg.TextVAlign;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextAlignment;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextFont;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextSize;
+import org.abstractica.javatoopenscad.modulesimpl.common.text.TextAttributes;
 
-public class Text2DImpl implements BuiltInModule
+public class Text2DModuleImpl implements BuiltInModule
 {
 	private final String text;
-	private final TextFont font;
-	private final TextSize size;
-	private final TextAlignment alignment;
+	private final TextAttributes attributes;
 	private final int resolution;
 
-	public Text2DImpl(String text, TextFont font, TextSize size, TextAlignment alignment, int resolution)
+	public Text2DModuleImpl(String text, TextAttributes attributes, int resolution)
 	{
 		this.text = text;
-		this.font = font;
-		this.size = size;
-		this.alignment = alignment;
+		this.attributes = attributes;
 		this.resolution = resolution;
 	}
 
@@ -31,9 +25,7 @@ public class Text2DImpl implements BuiltInModule
 	public void getArguments(ArgumentCollector collector)
 	{
 		collector.add("text", text);
-		collector.add("font", font);
-		collector.add("size", size);
-		collector.add("alignment", alignment);
+		collector.add("attributes", attributes);
 		collector.add("resolution", resolution);
 	}
 
@@ -51,44 +43,44 @@ public class Text2DImpl implements BuiltInModule
 
 		// size
 		cb.print("size = ");
-		cb.print(Double.toString(size.size));
+		cb.print(Double.toString(attributes.size.size));
 		cb.println(",");
 
 		// font
 		cb.print("font = \"");
-		cb.print(font.fontName);
+		cb.print(attributes.font.fontName);
 		cb.print(":style=");
-		cb.print(font.fontStyle);
+		cb.print(attributes.font.fontStyle);
 		cb.println("\",");
 
 		// halign
 		cb.print("halign = \"");
-		cb.print(halign(alignment.halign));
+		cb.print(halign(attributes.alignment.halign));
 		cb.println("\",");
 
 		// valign
 		cb.print("valign = \"");
-		cb.print(valign(alignment.valign));
+		cb.print(valign(attributes.alignment.valign));
 		cb.println("\",");
 
 		// spacing
 		cb.print("spacing = ");
-		cb.print(Double.toString(size.spacing));
+		cb.print(Double.toString(attributes.size.spacing));
 		cb.println(",");
 
 		// direction
 		cb.print("direction = \"");
-		cb.print(direction(alignment.direction));
+		cb.print(direction(attributes.alignment.direction));
 		cb.println("\",");
 
 		// language
 		cb.print("language = \"");
-		cb.print(font.language);
+		cb.print(attributes.font.language);
 		cb.println("\",");
 
 		// script
 		cb.print("script = \"");
-		cb.print(font.script);
+		cb.print(attributes.font.script);
 		cb.println("\",");
 
 		// language

@@ -7,9 +7,9 @@ import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
 import org.abstractica.javatoopenscad.csg.*;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextAlignment;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextFont;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextSize;
+import org.abstractica.javatoopenscad.modulesimpl.common.text.TextAlignment;
+import org.abstractica.javatoopenscad.modulesimpl.common.text.TextFont;
+import org.abstractica.javatoopenscad.modulesimpl.common.text.TextSize;
 import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;
 import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
 

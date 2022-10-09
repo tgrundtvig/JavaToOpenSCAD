@@ -8,6 +8,7 @@ import org.abstractica.javatoopenscad.csg.Angle;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
 import org.abstractica.javatoopenscad.csg.csg3d.Polar3D;
 import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
+import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.modulesimpl.common.*;
 import org.abstractica.javatoopenscad.modulesimpl.csg3d.construct3d.Mirror3D;
 import org.abstractica.javatoopenscad.modulesimpl.csg3d.construct3d.Scale3D;
@@ -15,9 +16,9 @@ import org.abstractica.javatoopenscad.modulesimpl.csg3d.construct3d.Translate3D;
 
 public class Construct3DImpl extends AModuleFactory implements Construct3D
 {
-	public Construct3DImpl(ModuleFactory factory)
+	public Construct3DImpl(CSGImpl csg)
 	{
-		super(factory);
+		super(csg);
 	}
 
 	@Override
@@ -54,6 +55,18 @@ public class Construct3DImpl extends AModuleFactory implements Construct3D
 	public Module3DFrom3D scale3D(Vector3D s)
 	{
 		return scale3D(s.x(), s.y(), s.z());
+	}
+
+	@Override
+	public Module3DFrom3D resize3D(double x, double y, double z, boolean autoX, boolean autoY, boolean autoZ)
+	{
+		return module3DFrom3D(new Resize(x, y, z, autoX, autoY, autoZ));
+	}
+
+	@Override
+	public Module3DFrom3D resize3D(Vector3D newSize, boolean autoX, boolean autoY, boolean autoZ)
+	{
+		return resize3D(newSize.x(), newSize.y(), newSize.z(), autoX, autoY, autoZ);
 	}
 
 	@Override

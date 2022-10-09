@@ -25,6 +25,11 @@ public interface Construct2D
 	Module2DFrom2D scale2D(double x, double y);
 	Module2DFrom2D scale2D(Vector2D s);
 
+	//Resize
+	Module2DFrom2D resize2D(double x, double y, boolean autoX, boolean autoY);
+	Module2DFrom2D resize2D(Vector2D newSize, boolean autoX, boolean autoY);
+
+
 	//Mirror
 	Module2DFrom2D mirror2D(double normX, double normY);
 	Module2DFrom2D mirror2D(Vector2D norm);

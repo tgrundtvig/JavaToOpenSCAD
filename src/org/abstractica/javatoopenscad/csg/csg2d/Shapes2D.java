@@ -1,6 +1,7 @@
 package org.abstractica.javatoopenscad.csg.csg2d;
 
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
+import org.abstractica.javatoopenscad.csg.Angle;
 
 public interface Shapes2D
 {
@@ -12,5 +13,8 @@ public interface Shapes2D
 	//Round shapes
 	Module2D unitCircle2D(int angularResolution);
 	Module2D circle2D(double diameter, int angularResolution);
+	Module2D hollowCircle2D(double innerDiameter, double outerDiameter, int angularResolution);
 	Module2D ellipse2D(double diameterX, double diameterY, int angularResolution);
+
+	Module2D pie2D(double diameter, Angle start, Angle end, int steps);
 }

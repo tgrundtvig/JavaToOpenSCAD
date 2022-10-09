@@ -1,4 +1,4 @@
-package org.abstractica.javatoopenscad.modulesimpl.common;
+package org.abstractica.javatoopenscad.modulesimpl.common.text;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.HasArguments;

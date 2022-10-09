@@ -3,15 +3,18 @@ package org.abstractica.javatoopenscad.modulesimpl.csg2d;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
 import org.abstractica.javatoopenscad.coreimpl.core.impl.AModuleFactory;
+import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.shapes2d.*;
 
 public class Shapes2DImpl extends AModuleFactory implements Shapes2D
 {
-	public Shapes2DImpl(ModuleFactory factory)
+	public Shapes2DImpl(CSGImpl csg)
 	{
-		super(factory);
+		super(csg);
 	}
 
 	@Override
@@ -45,9 +48,21 @@ public class Shapes2DImpl extends AModuleFactory implements Shapes2D
 	}
 
 	@Override
+	public Module2D hollowCircle2D(double innerDiameter, double outerDiameter, int angularResolution)
+	{
+		return module2D(new HollowCircle2D(innerDiameter, outerDiameter, angularResolution));
+	}
+
+	@Override
 	public Module2D ellipse2D(double diameterX, double diameterY, int angularResolution)
 	{
 		return module2D(new Ellipse2D(diameterX, diameterY, angularResolution));
+	}
+
+	@Override
+	public Module2D pie2D(double diameter, Angle start, Angle end, int steps)
+	{
+		return module2D(new Pie2D(diameter, start, end, steps));
 	}
 
 }

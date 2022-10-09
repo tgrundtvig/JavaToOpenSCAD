@@ -5,6 +5,7 @@ import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom3D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom2D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
+import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.plugininterfaces.*;
 
 public interface ModuleFactory

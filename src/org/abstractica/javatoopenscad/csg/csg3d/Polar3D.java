@@ -36,7 +36,7 @@ public interface Polar3D
 		double x = rProj * Math.cos(theta.asRadians());
 		double y = rProj * Math.sin(theta.asRadians());
 		double z = r * Math.sin(elevation.asRadians());
-		return Vector3D.vector3D(x, y, z).asPolar3D();
+		return Vector3D.create(x, y, z).asPolar3D();
 	}
 	double r();
 	Angle theta();

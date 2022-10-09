@@ -27,6 +27,7 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 	private final PluginModule plugin;
 	private ArrayList<OpenSCADModule> children;
 	private boolean debugMarked;
+	private boolean disabled;
 
 	public OpenSCADModuleImpl(CSG csg, Identifier identifier, PluginModule plugin)
 	{
@@ -39,6 +40,7 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 		asM3DFrom2D = new M3DFrom2D();
 		asM3DFrom3D = new M3DFrom3D();
 		debugMarked = false;
+		disabled = false;
 	}
 
 	@Override
@@ -54,6 +56,12 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 	}
 
 	@Override
+	public void disable()
+	{
+		disabled = true;
+	}
+
+	@Override
 	public void generateCall(CodeBuilder cb, Map<Integer, OpenSCADModule> usedModules)
 	{
 		cb.print("// ");
@@ -61,6 +69,10 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 		if(debugMarked)
 		{
 			cb.print("#");
+		}
+		if(disabled)
+		{
+			cb.print("%");
 		}
 		if(plugin instanceof BuiltInModule)
 		{
@@ -221,6 +233,12 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 		public void debugMark()
 		{
 			OpenSCADModuleImpl.this.debugMark();
+		}
+
+		@Override
+		public void disable()
+		{
+			OpenSCADModuleImpl.this.disable();
 		}
 
 		@Override

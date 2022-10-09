@@ -5,15 +5,16 @@ import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
 import org.abstractica.javatoopenscad.coreimpl.core.impl.AModuleFactory;
 import org.abstractica.javatoopenscad.csg.csg2d.Arrange2D;
+import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.arrange2d.CircleOf2D;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.arrange2d.LineOf2D;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.arrange2d.CircleOfModules2D;
 
 public class Arrange2DImpl extends AModuleFactory implements Arrange2D
 {
-	public Arrange2DImpl(ModuleFactory factory)
+	public Arrange2DImpl(CSGImpl csg)
 	{
-		super(factory);
+		super(csg);
 	}
 
 	@Override

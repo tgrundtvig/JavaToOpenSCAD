@@ -5,9 +5,10 @@ import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
 import org.abstractica.javatoopenscad.csg.*;
 import org.abstractica.javatoopenscad.csg.csg2d.Text2D;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextAlignment;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextFont;
-import org.abstractica.javatoopenscad.modulesimpl.common.TextSize;
+import org.abstractica.javatoopenscad.modulesimpl.common.text.TextAlignment;
+import org.abstractica.javatoopenscad.modulesimpl.common.text.TextAttributes;
+import org.abstractica.javatoopenscad.modulesimpl.common.text.TextFont;
+import org.abstractica.javatoopenscad.modulesimpl.common.text.TextSize;
 import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;
 
 public class TextLineup2D implements Module2DImpl
@@ -42,10 +43,11 @@ public class TextLineup2D implements Module2DImpl
 	{
 		Text2D text2D = csg.csg2D().text2D();
 		TextAlignment align = CSGText.textAlignment(TextHAlign.LEFT, TextVAlign.BOTTOM, TextDirection.LEFT_TO_RIGHT);
+		TextAttributes attributes = CSGText.textAttributes(font, size, align);
 		Module2DFrom2D union = csg.csg2D().construct2D().union2D();
 		for(int i = 0; i < text.length(); ++i)
 		{
-			Module2D letter = text2D.text("" + text.charAt(i), font, size, align,16);
+			Module2D letter = text2D.text("" + text.charAt(i), attributes,16);
 			Module2DFrom2D translate = csg.csg2D().construct2D().translate2D(i*letterDistance, 0);
 			translate.add(letter);
 			union.add(translate);

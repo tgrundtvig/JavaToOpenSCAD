@@ -12,6 +12,8 @@ public interface Construct3D
 	Module3DFrom3D rotate3D(Angle x, Angle y, Angle z);
 	Module3DFrom3D scale3D(double x, double y, double z);
 	Module3DFrom3D scale3D(Vector3D s);
+	Module3DFrom3D resize3D(double x, double y, double z, boolean autoX, boolean autoY, boolean autoZ);
+	Module3DFrom3D resize3D(Vector3D s, boolean autoX, boolean autoY, boolean autoZ);
 	Module3DFrom3D mirror3D(double normX, double normY, double normZ);
 	Module3DFrom3D mirror3D(Vector3D norm);
 	Module3DFrom3D mirror3D(Polar3D norm);

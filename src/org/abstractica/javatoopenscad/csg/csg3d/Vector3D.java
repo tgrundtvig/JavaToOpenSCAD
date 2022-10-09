@@ -6,7 +6,7 @@ import org.abstractica.javatoopenscad.csg.Angle;
 public interface Vector3D
 {
 	Vector3D ORIGO = new Coord3DImpl(0,0,0,0, Angle.ZERO, Angle.ZERO);
-	static Vector3D vector3D(double x, double y, double z)
+	static Vector3D create(double x, double y, double z)
 	{
 		if(x == 0 && y == 0 && z == 0) return ORIGO;
 		double r = Math.sqrt(x*x + y*y + z*z);

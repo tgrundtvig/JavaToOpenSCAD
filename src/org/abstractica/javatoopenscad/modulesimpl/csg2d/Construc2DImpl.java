@@ -9,6 +9,7 @@ import org.abstractica.javatoopenscad.csg.csg2d.Construct2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Path2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Polar2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.modulesimpl.common.*;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.*;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.polygon2d.Path2DImpl;
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 
 public class Construc2DImpl extends AModuleFactory implements Construct2D
 {
-	public Construc2DImpl(ModuleFactory factory)
+	public Construc2DImpl(CSGImpl csg)
 	{
-		super(factory);
+		super(csg);
 	}
 
 	@Override
@@ -89,6 +90,18 @@ public class Construc2DImpl extends AModuleFactory implements Construct2D
 	public Module2DFrom2D scale2D(Vector2D s)
 	{
 		return scale2D(s.x(), s.y());
+	}
+
+	@Override
+	public Module2DFrom2D resize2D(double x, double y, boolean autoX, boolean autoY)
+	{
+		return module2DFrom2D(new Resize(x, y, 0, autoX, autoY, false));
+	}
+
+	@Override
+	public Module2DFrom2D resize2D(Vector2D newSize, boolean autoX, boolean autoY)
+	{
+		return resize2D(newSize.x(), newSize.y(), autoX, autoY);
 	}
 
 	@Override
