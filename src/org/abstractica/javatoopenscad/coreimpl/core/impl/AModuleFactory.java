@@ -18,11 +18,15 @@ public abstract class AModuleFactory implements ModuleFactory
 
 	public AModuleFactory(CSGImpl csg)
 	{
-
 		this.csg = csg;
 	}
 
 	public CSG getCSG()
+	{
+		return csg;
+	}
+
+	public CSGImpl getCSGImpl()
 	{
 		return csg;
 	}

@@ -12,8 +12,7 @@ import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
 import org.abstractica.openbuildsystem.*;
-import org.abstractica.openbuildsystem.trainsystem.CodeBlock;
-import org.abstractica.openbuildsystem.trainsystem.TrainWheels;
+import org.abstractica.openbuildsystem.generators.trainsystem.rollingstock.TrainWheels;
 
 import java.io.IOException;
 
@@ -30,17 +29,12 @@ public class Playground2D implements Module2DImpl
 		Shapes2D s2D = csg.csg2D().shapes2D();
 		Construct2D c2D = csg.csg2D().construct2D();
 
-		Adjust adjust0 = new ZeroAdjust();
-		Adjust adjust1 = new AdjustImpl(0.2, 0, -0.1, 0);
+		Print3DAdjust adj = Print3DAdjustImpl.defaultAdjust;
 
 		// Generate your geometry here:
 
-		TrainWheels tw = new TrainWheels();
-		return tw.sawWheelProfile(1,1, 64, csg, adjust1);
-		//CrossAxles ca = new CrossAxles();
-		//return ca.axleProfile(8, 0.2, csg);
-		//PrintedTracks pt = new PrintedTracks();
-		//return pt.trackProfile(csg, adjust1);
+		TrainWheels tw = new TrainWheels(csg, adj);
+		return tw.sawWheelProfile(1,1, 64);
 	}
 
 

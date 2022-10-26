@@ -44,7 +44,7 @@ public class Cone3D implements Module3DImpl
 			//make it upside down
 			Module3D cone = c3D.linearExtrude(height, ratio, 4)
 					.add(s2D.circle2D(diameterTop, angularResolution));
-			return c3D.rotate3D(Angle.rotations(0.5), Angle.ZERO, Angle.ZERO).add(cone);
+			return c3D.rotateX(Angle.rotations(0.5)).add(cone);
 		}
 		else
 		{

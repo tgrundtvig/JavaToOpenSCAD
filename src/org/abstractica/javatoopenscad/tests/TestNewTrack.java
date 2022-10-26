@@ -14,9 +14,9 @@ import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.plugininterfaces.Module3DImpl;
-import org.abstractica.openbuildsystem.Adjust;
-import org.abstractica.openbuildsystem.AdjustImpl;
-import org.abstractica.openbuildsystem.trainsystem.NewTrack;
+import org.abstractica.openbuildsystem.Print3DAdjust;
+import org.abstractica.openbuildsystem.Print3DAdjustImpl;
+import org.abstractica.openbuildsystem.generators.trainsystem.NewTrack;
 
 import java.io.IOException;
 
@@ -33,8 +33,7 @@ public class TestNewTrack implements Module3DImpl
 		Shapes2D s2D = csg2D.shapes2D();
 		Construct2D c2D = csg2D.construct2D();
 		Construct3D c3D = csg.csg3D().construct3D();
-
-		Adjust adjust = new AdjustImpl(0.1, 0, -0.1, 0);
+		Print3DAdjust adjust = Print3DAdjustImpl.defaultAdjust;
 		NewTrack nt = new NewTrack();
 		Module3DFrom3D union = csg.csg3D().construct3D().union3D();
 		union.add(c3D.translate3D(0,0,5).add(nt.innerCurvedTrack(600, csg, adjust)));
@@ -42,11 +41,11 @@ public class TestNewTrack implements Module3DImpl
 		Module3D sleeper = nt.sleeper(csg, adjust);
 		union.add(sleeper);
 		union.add(c3D.translate3D(-600,0,0)
-				.add(c3D.rotate3D(Angle.ZERO, Angle.ZERO, Angle.rotations(1.0 / 64))
+				.add(c3D.rotateZ(Angle.rotations(1.0 / 64))
 						.add(c3D.translate3D(600, 0, 0)
 								.add(sleeper))));
 		union.add(c3D.translate3D(-600,0,0)
-				.add(c3D.rotate3D(Angle.ZERO, Angle.ZERO, Angle.rotations(1.0 / 32))
+				.add(c3D.rotateZ(Angle.rotations(1.0 / 32))
 						.add(c3D.translate3D(600, 0, 0)
 								.add(sleeper))));
 		union.add(c3D.translate3D(0,0,10).add(nt.curvedCodeBlockBase(csg, adjust)));

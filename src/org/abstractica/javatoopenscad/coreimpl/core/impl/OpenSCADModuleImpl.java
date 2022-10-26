@@ -64,8 +64,8 @@ public class OpenSCADModuleImpl implements Module2D, Module3D
 	@Override
 	public void generateCall(CodeBuilder cb, Map<Integer, OpenSCADModule> usedModules)
 	{
-		cb.print("// ");
-		cb.println(id.getSimpeNameWithArguments());
+		//cb.print("// ");
+		//cb.println(id.getSimpeNameWithArguments());
 		if(debugMarked)
 		{
 			cb.print("#");

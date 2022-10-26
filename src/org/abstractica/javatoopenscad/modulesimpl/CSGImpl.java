@@ -21,6 +21,7 @@ import java.util.Map;
 
 public class CSGImpl implements CSG, ModuleFactory
 {
+	private static int instanceID = 0;
 	private final Map<Integer, PluginModule> uniquePlugins;
 	private final Map<Integer, OpenSCADModuleImpl> uniqueModules;
 	private final CSG2D csg2D;
@@ -120,7 +121,8 @@ public class CSGImpl implements CSG, ModuleFactory
 
 	private OpenSCADModuleImpl getBaseModule(PluginModule plugInModule)
 	{
-		Identifier id = new IdentifierImpl(plugInModule);
+		//This is to prevent the same Mxxx module name for two different instances.
+		Identifier id = new IdentifierImpl(plugInModule, instanceID++);
 		plugInModule = uniquePlugin(id, plugInModule);
 		return new OpenSCADModuleImpl(this, id, plugInModule);
 	}

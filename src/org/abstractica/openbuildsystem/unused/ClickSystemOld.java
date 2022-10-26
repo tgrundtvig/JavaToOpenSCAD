@@ -1,4 +1,4 @@
-package org.abstractica.openbuildsystem;
+package org.abstractica.openbuildsystem.unused;
 
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
@@ -6,11 +6,12 @@ import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.csg.Angle;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.openbuildsystem.Print3DAdjust;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClickSystem2
+public class ClickSystemOld
 {
 	private final double height = 10;
 	private final double width = 0.4 * height;
@@ -23,22 +24,22 @@ public class ClickSystem2
 	private final double clickerBaseThickness = 0.2*height;
 	private final double clickerBaseLength = 0.8*height;
 
-	public Module3D clicker(boolean reclick, CSG csg, Adjust adjust)
+	public Module3D clicker(boolean reclick, CSG csg, Print3DAdjust adjust)
 	{
 		return csg.csg3D().construct3D().linearExtrude(width, 10)
 				.add(clickerProfile(reclick, csg, adjust));
 	}
 
-	public Module3D clickerCutout(boolean reclick, CSG csg, Adjust adjust)
+	public Module3D clickerCutout(boolean reclick, CSG csg, Print3DAdjust adjust)
 	{
 		return csg.csg3D().construct3D()
 				.translate3D(0,0,0.5*height)
 				.add(csg.csg3D().construct3D().rotate3D(Angle.degrees(-90), Angle.ZERO, Angle.degrees(90))
-				.add(csg.csg3D().construct3D().linearExtrude(width+2*adjust.getXYHoleAdjust(), 4)
+				.add(csg.csg3D().construct3D().linearExtrude(width+2*adjust.holeSquareTight().xy(), 4)
 				.add(clickerCutoutProfile(reclick, csg, adjust))));
 	}
 
-	private Module2D clickerProfile(boolean reclick, CSG csg, Adjust adjust)
+	private Module2D clickerProfile(boolean reclick, CSG csg, Print3DAdjust adjust)
 	{
 		List<Vector2D> points = new ArrayList<>();
 		points.add(Vector2D.create(0,0));
@@ -66,10 +67,10 @@ public class ClickSystem2
 		Module2D half = csg.csg2D().construct2D().polygon2D(points);
 		Module2DFrom2D union = csg.csg2D().construct2D().union2D().add(half);
 		union.add(csg.csg2D().construct2D().mirror2D(1, 0).add(half));
-		return csg.csg2D().construct2D().offsetRound2D(adjust.getXYAdjust(), 32).add(union);
+		return csg.csg2D().construct2D().offsetRound2D(adjust.solidSquareTight().xy(), 32).add(union);
 	}
 
-	private Module2D clickerCutoutProfile(boolean reclick, CSG csg, Adjust adjust)
+	private Module2D clickerCutoutProfile(boolean reclick, CSG csg, Print3DAdjust adjust)
 	{
 		List<Vector2D> points = new ArrayList<>();
 		points.add(Vector2D.create(0,0));
@@ -95,6 +96,6 @@ public class ClickSystem2
 		Module2D half = csg.csg2D().construct2D().polygon2D(points);
 		Module2DFrom2D union = csg.csg2D().construct2D().union2D().add(half);
 		union.add(csg.csg2D().construct2D().mirror2D(1, 0).add(half));
-		return csg.csg2D().construct2D().offsetRound2D(adjust.getXYHoleAdjust(), 32).add(union);
+		return csg.csg2D().construct2D().offsetRound2D(adjust.holeSquareTight().xy(), 32).add(union);
 	}
 }

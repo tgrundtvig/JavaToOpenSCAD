@@ -16,5 +16,9 @@ public interface Shapes2D
 	Module2D hollowCircle2D(double innerDiameter, double outerDiameter, int angularResolution);
 	Module2D ellipse2D(double diameterX, double diameterY, int angularResolution);
 
+	//Triangles
+	Module2D isoscelesTriangle(double base, double height);
+
+	//Pie
 	Module2D pie2D(double diameter, Angle start, Angle end, int steps);
 }

@@ -2,7 +2,6 @@ package org.abstractica.javatoopenscad.modulesimpl.csg3d;
 
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom2D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
-import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
 import org.abstractica.javatoopenscad.coreimpl.core.impl.AModuleFactory;
 import org.abstractica.javatoopenscad.csg.Angle;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
@@ -11,6 +10,7 @@ import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.modulesimpl.common.*;
 import org.abstractica.javatoopenscad.modulesimpl.csg3d.construct3d.Mirror3D;
+import org.abstractica.javatoopenscad.modulesimpl.csg3d.construct3d.RotateAround3D;
 import org.abstractica.javatoopenscad.modulesimpl.csg3d.construct3d.Scale3D;
 import org.abstractica.javatoopenscad.modulesimpl.csg3d.construct3d.Translate3D;
 
@@ -43,6 +43,48 @@ public class Construct3DImpl extends AModuleFactory implements Construct3D
 	public Module3DFrom3D rotate3D(Angle x, Angle y, Angle z)
 	{
 		return module3DFrom3D(new Rotate(x, y, z));
+	}
+
+	@Override
+	public Module3DFrom3D rotateX(Angle a)
+	{
+		return module3DFrom3D(new Rotate(a, Angle.ZERO, Angle.ZERO));
+	}
+
+	@Override
+	public Module3DFrom3D rotateY(Angle a)
+	{
+		return module3DFrom3D(new Rotate(Angle.ZERO, a, Angle.ZERO));
+	}
+
+	@Override
+	public Module3DFrom3D rotateZ(Angle a)
+	{
+		return module3DFrom3D(new Rotate(Angle.ZERO, Angle.ZERO, a));
+	}
+
+	@Override
+	public Module3DFrom3D rotateAround3D(Angle ax, Angle ay, Angle az, double px, double py, double pz)
+	{
+		return module3DFrom3D(new RotateAround3D(ax, ay, az, px, py, pz));
+	}
+
+	@Override
+	public Module3DFrom3D rotateAroundX(Angle a, double py, double pz)
+	{
+		return module3DFrom3D(new RotateAround3D(a, Angle.ZERO, Angle.ZERO, 0, py, pz));
+	}
+
+	@Override
+	public Module3DFrom3D rotateAroundY(Angle a, double px, double pz)
+	{
+		return module3DFrom3D(new RotateAround3D(Angle.ZERO, a, Angle.ZERO, px, 0, pz));
+	}
+
+	@Override
+	public Module3DFrom3D rotateAroundZ(Angle a, double px, double py)
+	{
+		return module3DFrom3D(new RotateAround3D(Angle.ZERO, Angle.ZERO, a, px, py, 0));
 	}
 
 	@Override

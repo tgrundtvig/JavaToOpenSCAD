@@ -19,6 +19,7 @@ public interface Construct2D
 
 	//Rotate
 	Module2DFrom2D rotate2D(Angle angle);
+	Module2DFrom2D rotateAround2D(Angle angle, double px, double py);
 	Module2DFrom2D rotateAndProject2D(Angle x, Angle y, Angle z);
 
 	//Scale

@@ -60,6 +60,12 @@ public class Shapes2DImpl extends AModuleFactory implements Shapes2D
 	}
 
 	@Override
+	public Module2D isoscelesTriangle(double base, double height)
+	{
+		return module2D(new IsoscelesTriangle(base, height));
+	}
+
+	@Override
 	public Module2D pie2D(double diameter, Angle start, Angle end, int steps)
 	{
 		return module2D(new Pie2D(diameter, start, end, steps));

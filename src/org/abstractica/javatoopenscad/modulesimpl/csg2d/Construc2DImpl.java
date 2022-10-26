@@ -14,6 +14,7 @@ import org.abstractica.javatoopenscad.modulesimpl.common.*;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.*;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.polygon2d.Path2DImpl;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.polygon2d.Polygon2D;
+import org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.polygon2d.PolygonModule;
 
 import java.util.ArrayList;
 
@@ -33,13 +34,17 @@ public class Construc2DImpl extends AModuleFactory implements Construct2D
 	@Override
 	public Module2D polygon2D(Iterable<Vector2D> vertices)
 	{
-		return module2D(new Polygon2D(vertices));
+		Polygon2D polygon = new Polygon2D(vertices);
+		Module2D polygonModule = module2D(polygon);
+		return module2D(new PolygonModule(polygon, polygonModule));
 	}
 
 	@Override
 	public Module2D polygon2DMultiPaths(Iterable<Vector2D> points, Iterable<Path2D> paths)
 	{
-		return module2D(new Polygon2D(points, paths));
+		Polygon2D polygon = new Polygon2D(points, paths);
+		Module2D polygonModule = module2D(polygon);
+		return module2D(new PolygonModule(polygon, polygonModule));
 	}
 
 	@Override
@@ -72,6 +77,12 @@ public class Construc2DImpl extends AModuleFactory implements Construct2D
 	public Module2DFrom2D rotate2D(Angle angle)
 	{
 		return module2DFrom2D(new Rotate(Angle.ZERO, Angle.ZERO, angle));
+	}
+
+	@Override
+	public Module2DFrom2D rotateAround2D(Angle angle, double px, double py)
+	{
+		return module2DFrom2D(new RotateAround2D(angle, px, py));
 	}
 
 	@Override

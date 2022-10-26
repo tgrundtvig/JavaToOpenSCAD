@@ -43,6 +43,26 @@ public class IdentifierImpl implements ArgumentCollector, Identifier
 		clearText = null;
 	}
 
+	public IdentifierImpl(HasArguments item, int instanceID)
+	{
+		this.simpleName = item.getSimpleName();
+		this.fullName = item.getClass().getName();
+		this.uniqueId = new StringBuilder();
+		this.uniqueId.append("in");
+		this.uniqueId.append(instanceID);
+		this.clearText = new StringBuilder();
+		first = true;
+		uniqueId.append(AllStrings.id(fullName));
+		clearText.append(simpleName);
+		clearText.append("(");
+		item.getArguments(this);
+		clearText.append(")");
+		nameWithArguments = clearText.toString();
+		id = AllStrings.id(uniqueId.toString());
+		uniqueId = null;
+		clearText = null;
+	}
+
 	@Override
 	public void add(String name, boolean b)
 	{

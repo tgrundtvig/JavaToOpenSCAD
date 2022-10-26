@@ -12,9 +12,9 @@ import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.plugininterfaces.Module3DImpl;
-import org.abstractica.openbuildsystem.Adjust;
-import org.abstractica.openbuildsystem.AdjustImpl;
-import org.abstractica.openbuildsystem.trainsystem.TrainWheels;
+import org.abstractica.openbuildsystem.Print3DAdjust;
+import org.abstractica.openbuildsystem.Print3DAdjustImpl;
+import org.abstractica.openbuildsystem.generators.trainsystem.rollingstock.TrainWheels;
 
 import java.io.IOException;
 
@@ -26,15 +26,15 @@ public class TestTrainWheel implements Module3DImpl
 	@Override
 	public Module3D buildGeometry(CSG csg)
 	{
-		Adjust adj = new AdjustImpl(0.1, 0, -0.1, 0);
+		Print3DAdjust adj = Print3DAdjustImpl.defaultAdjust;
 		//Get shortcuts to the api's you want to use:
 		CSG2D csg2D = csg.csg2D();
 		Shapes2D s2D = csg2D.shapes2D();
 		Construct2D c2D = csg2D.construct2D();
 		Construct3D c3D = csg.csg3D().construct3D();
 
-		TrainWheels tw = new TrainWheels();
-		return tw.sawWheel(csg, adj);
+		TrainWheels tw = new TrainWheels(csg, adj);
+		return tw.sawWheel();
 	}
 
 

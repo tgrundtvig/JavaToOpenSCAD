@@ -39,7 +39,7 @@ public class OpenSCADFileOutput
 		if (!Files.exists(parentDir))
 			Files.createDirectories(parentDir);
 		Files.writeString(path, cb.toString());
-		System.out.println(AllStrings.listAllStrings());
+		//System.out.println(AllStrings.listAllStrings());
 	}
 
 }

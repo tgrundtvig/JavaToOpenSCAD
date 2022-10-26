@@ -1,13 +1,23 @@
-package org.abstractica.openbuildsystem;
+package org.abstractica.openbuildsystem.generators.axles;
 
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.*;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
 import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
+import org.abstractica.openbuildsystem.Print3DAdjust;
 
 public class CrossAxles
 {
-	public Module2D axleProfile(double diameter, double offset, CSG csg)
+	private final CSG csg;
+	private final Print3DAdjust adjust;
+
+	public CrossAxles(CSG csg, Print3DAdjust adjust)
+	{
+		this.csg = csg;
+		this.adjust = adjust;
+	}
+
+	public Module2D axleProfile(double diameter, double offset)
 	{
 		Module2D rect1 = csg.csg2D().shapes2D().rectCorners2D(Vector2D.create(-1.0/3.0, -1.5),
 															Vector2D.create(1.0/3.0, 1.5));
@@ -22,27 +32,27 @@ public class CrossAxles
 		return off;
 	}
 
-	public Module3D axleTip(double diameter, CSG csg, Adjust adjust)
+	public Module3D axleTip(double diameter)
 	{
 		double height = diameter*0.2;
-		Module2D profile = axleProfile(diameter/1.1, adjust.getXYAdjust(), csg);
+		Module2D profile = axleProfile(diameter/1.1, adjust.solidSquareTight().xy());
 		Module3DFrom2D extrude = csg.csg3D().construct3D().linearExtrude(height, 1.1, 2).add(profile);
 		Module3D res = csg.csg3D().construct3D().translate3D(0,0,-0.5*height).add(extrude);
 		return res;
 	}
 
-	public Module3D axleCutout(double diameter, double length, CSG csg, Adjust adjust)
+	public Module3D axleCutout(double diameter, double length)
 	{
-		Module2D profile = axleProfile(diameter, adjust.getXYHoleAdjust(), csg);
+		Module2D profile = axleProfile(diameter, adjust.holeSquareTight().xy());
 		return csg.csg3D().construct3D().linearExtrude(length, 4).add(profile);
 	}
 
-	public Module3D axle(double diameter, double length, boolean bottomTip, boolean topTip, CSG csg, Adjust adjust)
+	public Module3D axle(double diameter, double length, boolean bottomTip, boolean topTip)
 	{
-		Module2D profile = axleProfile(diameter, adjust.getXYAdjust(), csg);
+		Module2D profile = axleProfile(diameter, adjust.solidSquareTight().xy());
 		Module3D axle = csg.csg3D().construct3D().linearExtrude(length, 4).add(profile);
 		Module3D tipBottom = csg.csg3D().construct3D().translate3D(0,0,-0.5*length)
-				.add(axleTip(diameter, csg, adjust));
+				.add(axleTip(diameter));
 		Module3D tipTop = csg.csg3D().construct3D().mirror3D(Vector3D.create(0,0,1)).add(tipBottom);
 		Module3DFrom3D union = csg.csg3D().construct3D().union3D().add(axle);
 		if(bottomTip) union.add(tipBottom);
@@ -50,11 +60,11 @@ public class CrossAxles
 		return union;
 	}
 
-	public Module3D getAxleCutoutTest(double diameter, double length, CSG csg, Adjust adjust)
+	public Module3D getAxleCutoutTest(double diameter, double length)
 	{
 		Module3D cyl = csg.csg3D().shapes3D().cylinder3D(diameter + 8, length, 1024);
 		return csg.csg3D().construct3D().difference3D().add(cyl)
-				.add(axleCutout(diameter, length+2, csg, adjust));
+				.add(axleCutout(diameter, length+2));
 	}
 
 
