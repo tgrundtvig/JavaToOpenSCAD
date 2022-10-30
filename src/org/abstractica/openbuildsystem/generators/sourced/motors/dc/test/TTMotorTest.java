@@ -1,25 +1,23 @@
-package org.abstractica.javatoopenscad.tests.playground;
+package org.abstractica.openbuildsystem.generators.sourced.motors.dc.test;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
-import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
-import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
+import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
-import org.abstractica.javatoopenscad.csg.math.Angle;
+import org.abstractica.javatoopenscad.csg.CSG;
+import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Construct2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.plugininterfaces.Module3DImpl;
-import org.abstractica.javatoopenscad.csg.CSG;
-import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
-import org.abstractica.openbuildsystem.*;
-import org.abstractica.openbuildsystem.generators.trainsystem.tracks.TrackBuilder;
-
+import org.abstractica.openbuildsystem.Print3DAdjustImpl;
+import org.abstractica.openbuildsystem.generators.sourced.motors.dc.TTMotor;
 
 import java.io.IOException;
 
-public class PlayGround3D implements Module3DImpl
+public class TTMotorTest implements Module3DImpl
 {
 	@Override
 	public void getArguments(ArgumentCollector collector) {}
@@ -33,20 +31,16 @@ public class PlayGround3D implements Module3DImpl
 		Construct2D c2D = csg2D.construct2D();
 		Construct3D c3D = csg.csg3D().construct3D();
 
-		Print3DAdjust adj = Print3DAdjustImpl.defaultAdjust;
 
-		TrackBuilder trackBuilder = new TrackBuilder(csg, adj, 5, 10, 2, 1);
-
-		Module3DFrom3D union = c3D.union3D();
-		union.add(trackBuilder.curvedTrackSection(
-				0.25, 0.75, 600, Angle.degrees(45), true, 1024));
-		return union;
+		// Generate your geometry here:
+		TTMotor motor = new TTMotor(false, csg, Print3DAdjustImpl.defaultAdjust);
+		return motor.getCutout();
 	}
 
 	public static void main(String[] args) throws IOException
 	{
 		ModuleFactory factory = new CSGImpl();
-		Module3D module = factory.module3D(new PlayGround3D());
+		OpenSCADModule module = factory.module3D(new TTMotorTest());
 		OpenSCADFileOutput.generateOutput(module);
 	}
 }

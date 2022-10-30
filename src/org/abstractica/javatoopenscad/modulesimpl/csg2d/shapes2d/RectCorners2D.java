@@ -5,7 +5,7 @@ import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
 import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;
 import org.abstractica.javatoopenscad.csg.CSG;
-import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
 
 public class RectCorners2D implements Module2DImpl
 {

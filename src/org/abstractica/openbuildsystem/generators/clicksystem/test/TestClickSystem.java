@@ -6,7 +6,7 @@ import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.Angle;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;

@@ -1,4 +1,4 @@
-package org.abstractica.javatoopenscad.tests;
+package org.abstractica.openbuildsystem.generators.trainsystem.tracks.switches.tests;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
@@ -14,11 +14,11 @@ import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.plugininterfaces.Module3DImpl;
 import org.abstractica.openbuildsystem.Print3DAdjust;
 import org.abstractica.openbuildsystem.Print3DAdjustImpl;
-import org.abstractica.openbuildsystem.generators.trainsystem.tracks.Switch;
+import org.abstractica.openbuildsystem.generators.trainsystem.tracks.switches.Switch100;
 
 import java.io.IOException;
 
-public class SwitchTest implements Module3DImpl
+public class Switch100Test implements Module3DImpl
 {
 	@Override
 	public void getArguments(ArgumentCollector collector) {}
@@ -34,30 +34,37 @@ public class SwitchTest implements Module3DImpl
 
 		Print3DAdjust adj = Print3DAdjustImpl.defaultAdjust;
 
-		Switch sw = new Switch(csg, adj);
+		Switch100 sw = new Switch100(csg, adj);
 		Module3DFrom3D union = c3D.union3D();
 
-		//union.add(sw.switchLayout());
+		union.add(sw.switchLayout());
+		union.add(sw.allSleepers());
+		//union.add(sw.switchTrack(true));
+		//union.add(sw.switchTrack(false));
 		//union.add(sw.crossSection());
-		//union.add(sw.switcher());
 
-		union.add(sw.leftCurve02());
-		union.add(sw.rightStraight02());
-		union.add(sw.doubleSleeper(0));
-		union.add(sw.doubleSleeper(1));
-		union.add(sw.doubleSleeper(2));
-		union.add(sw.curveSwitchTrack());
-		union.add(sw.straightSwitchTrack());
-
-		//union.add(sw.crossSection());
-		//union.add(sw.allSleepers());
+		//union.add(sw.stdTrack(3, 4, true, false, false));
+		//union.add(sw.stdTrack(0, 2, false, false, false));
+		//union.add(sw.stdTrack(2, 4, true, true, true));
+		//union.add(sw.stdTrack(2, 4, false, false, true));
+		//union.add(sw.stdTrack(4, 6, true, true, true));
+		//union.add(sw.stdTrack(4, 6, false, false, true));
+		//union.add(sw.stdTrack(2, 3, false, true, true));
+		//union.add(sw.stdTrack(2, 3, true, false, true));
+		//union.add(sw.stdTrack(4, 6, false, true, true));
+		//union.add(sw.stdTrack(4, 6, true, false, true));
+		//union.add(sw.sleeper(0));
+		//union.add(sw.sleeper(1));
+		//union.add(sw.switchTrack(true));
+		//union.add(sw.switchTrack(false));
+		//union.add(sw.handleBar());
 		return union;
 	}
 
 	public static void main(String[] args) throws IOException
 	{
 		ModuleFactory factory = new CSGImpl();
-		Module3D module = factory.module3D(new SwitchTest());
+		Module3D module = factory.module3D(new Switch100Test());
 		OpenSCADFileOutput.generateOutput(module);
 	}
 }

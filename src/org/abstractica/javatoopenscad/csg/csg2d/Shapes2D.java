@@ -1,7 +1,8 @@
 package org.abstractica.javatoopenscad.csg.csg2d;
 
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.Angle;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
 
 public interface Shapes2D
 {

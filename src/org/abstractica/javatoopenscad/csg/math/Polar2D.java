@@ -1,6 +1,4 @@
-package org.abstractica.javatoopenscad.csg.csg2d;
-
-import org.abstractica.javatoopenscad.csg.Angle;
+package org.abstractica.javatoopenscad.csg.math;
 
 public interface Polar2D
 {

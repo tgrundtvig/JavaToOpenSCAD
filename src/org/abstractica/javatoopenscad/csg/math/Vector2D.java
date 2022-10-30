@@ -1,7 +1,6 @@
-package org.abstractica.javatoopenscad.csg.csg2d;
+package org.abstractica.javatoopenscad.csg.math;
 
-import org.abstractica.javatoopenscad.coreimpl.core.impl.Coord2DImpl;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.impl.Coord2DImpl;
 
 public interface Vector2D
 {

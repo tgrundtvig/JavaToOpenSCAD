@@ -3,7 +3,7 @@ package org.abstractica.javatoopenscad.modulesimpl.csg3d.construct3d;
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.Angle;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.plugininterfaces.Module3DFrom3DImpl;
 

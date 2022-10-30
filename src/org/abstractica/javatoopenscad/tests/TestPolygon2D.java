@@ -4,7 +4,7 @@ import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.csg.csg2d.Construct2D;
 import org.abstractica.javatoopenscad.plugininterfaces.Module2DImpl;
 import org.abstractica.javatoopenscad.csg.CSG;
-import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;

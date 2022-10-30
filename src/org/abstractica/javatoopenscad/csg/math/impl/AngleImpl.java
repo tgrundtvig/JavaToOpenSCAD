@@ -1,8 +1,8 @@
-package org.abstractica.javatoopenscad.coreimpl.core.impl;
+package org.abstractica.javatoopenscad.csg.math.impl;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.HasArguments;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.Angle;
 
 public class AngleImpl implements HasArguments, Angle
 {

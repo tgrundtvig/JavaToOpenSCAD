@@ -1,12 +1,13 @@
-package org.abstractica.openbuildsystem.generators.trainsystem.tracks;
+package org.abstractica.openbuildsystem.generators.trainsystem.tracks.switches;
 
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.Angle;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
-import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
+import org.abstractica.javatoopenscad.csg.math.Vector3D;
 import org.abstractica.openbuildsystem.Print3DAdjust;
+import org.abstractica.openbuildsystem.generators.trainsystem.tracks.TrackBuilder;
 
 public class ParallelSwitchTrackBuilder
 {
@@ -41,13 +42,18 @@ public class ParallelSwitchTrackBuilder
 		System.out.println("Radius: " + radius);
 		double a = Math.asin(halfTotalLength/radius);
 		this.angle = Angle.radians(a);
+		System.out.println("Angle: " + angle.asDegrees());
 		this.teeth = teeth;
 		this.angularResolution = angularResolution;
 	}
 
-	public Module3D curveTrackSection(double fBegin, double fEnd, boolean left)
+	public Module3D trackSection(double fBegin, double fEnd, boolean curve, boolean left)
 	{
 		if(fBegin >= fEnd) throw new RuntimeException("fBegin >= fEnd");
+		if(!curve)
+		{
+			return trackSection(fBegin, fEnd, false, left, 0, 0, false, false);
+		}
 		Module3DFrom3D union = c3d.union3D();
 		if(fBegin < 0.5)
 		{
@@ -62,70 +68,13 @@ public class ParallelSwitchTrackBuilder
 		return union;
 	}
 
-	public Module3D curveTrackSection(  double fBegin, double fEnd,
-	                                    boolean left, boolean insideFoot, boolean outsideFoot)
-	{
-		return track(fBegin, fEnd, left, insideFoot, outsideFoot, true);
-	}
-
-	public Module3D curveTransform(double f, Module3D child)
-	{
-		if(f <= 0.5)
-		{
-			return c3d.rotateAroundZ(Angle.rotations(f*angle.asRotations()*2.0), -radius, 0).add(child);
-		}
-		double totalLength = Angle.sin(angle)*radius*2.0;
-		double xt = (1.0 - Angle.cos(angle))*radius*2.0;
-		Module3D res = c3d.translate3D(-xt, totalLength, 0).add(child);
-		double a = 1.0 - f;
-		res = c3d.rotateAroundZ(Angle.rotations(a * angle.asRotations()*2.0), -xt + radius, totalLength).add(res);
-		return res;
-	}
-
-	public Module3D straightTrackSection(double fBegin, double fEnd, boolean left)
-	{
-		return track(fBegin, fEnd, left, false, false, false);
-	}
-
-	public Module3D straightTrackSection(   double fBegin, double fEnd, boolean left,
-	                                        boolean insideFoot, boolean outsideFoot)
-	{
-		return track(fBegin, fEnd, left, insideFoot, outsideFoot, false);
-	}
-
-	public Module3D straightTransform(double f, Module3D child)
-	{
-		return c3d.translate3D(0, f*totalLength, 0).add(child);
-	}
-
-	public double mmToFStraight(double mm)
-	{
-		return mm / totalLength;
-	}
-
-	public double mmToFInnerCurve(double mm)
-	{
-		double r = radius - 0.5*trackGauge;
-		return mmToFCurve(mm, r);
-	}
-
-	public double mmToFouterCurve(double mm)
-	{
-		double r = radius + 0.5*trackGauge;
-		return mmToFCurve(mm, r);
-	}
-
-	private double mmToFCurve(double mm, double r)
-	{
-		return (0.5 * mm) / (r*angle.asRadians());
-	}
-
-	private Module3D track(double fBegin, double fEnd, boolean left,
-	                       boolean insideFoot, boolean outsideFoot, boolean curve)
+	public Module3D trackSection(   double fBegin, double fEnd, boolean curve, boolean left,
+									double footBegin, double footEnd,
+	                                boolean insideFoot, boolean outsideFoot)
 	{
 		if(fBegin >= fEnd) throw new RuntimeException("fBegin >= fEnd");
 		Module3D track = curve ?
-				curveTrackSection(fBegin, fEnd, left) :
+				trackSection(fBegin, fEnd, true, left) :
 				trackBuilder.straightTrackSection(fBegin, fEnd, totalLength, true);
 		double tx = 0;
 		if(!curve)
@@ -151,22 +100,63 @@ public class ParallelSwitchTrackBuilder
 			}
 			ParallelSwitchTrackBuilder feetBuilder = new ParallelSwitchTrackBuilder(
 					csg, adjust, tb, gauge, totalLength, sleeperLength, false, angularResolution);
-			Module3D feet = feetBuilder.curveTrackSection(fBegin, fEnd, left);
+			Module3D feet = feetBuilder.trackSection(footBegin, footEnd,true, left);
 			union.add(feet);
 		}
 		else
 		{
-			double fLength = fEnd - fBegin;
-			Module3D feet = tb.straightTrack(fLength*totalLength, false);
+			double footLength = footEnd - footBegin;
+			Module3D feet = tb.straightTrack(footLength*totalLength, false);
 			double t = 0;
 			if(!(insideFoot && outsideFoot))
 			{
 				t = insideFoot ? 5 : -5;
 			}
-			feet = c3d.translate3D(tx+t,fBegin*totalLength,0).add(feet);
+			feet = c3d.translate3D(tx+t,footBegin*totalLength,0).add(feet);
 			union.add(feet);
 		}
 		return union;
+	}
+
+	public Module3D transform(double f, boolean curve, Module3D child)
+	{
+		if(!curve)
+		{
+			return c3d.translate3D(0, f*totalLength, 0).add(child);
+		}
+		if(f <= 0.5)
+		{
+			return c3d.rotateAroundZ(Angle.rotations(f*angle.asRotations()*2.0), -radius, 0).add(child);
+		}
+		double totalLength = Angle.sin(angle)*radius*2.0;
+		double xt = (1.0 - Angle.cos(angle))*radius*2.0;
+		Module3D res = c3d.translate3D(-xt, totalLength, 0).add(child);
+		double a = 1.0 - f;
+		res = c3d.rotateAroundZ(Angle.rotations(a * angle.asRotations()*2.0),
+				-xt + radius, totalLength).add(res);
+		return res;
+	}
+
+	public double mmToFStraight(double mm)
+	{
+		return mm / totalLength;
+	}
+
+	public double mmToFInnerCurve(double mm)
+	{
+		double r = radius - 0.5*trackGauge;
+		return mmToFCurve(mm, r);
+	}
+
+	public double mmToFOuterCurve(double mm)
+	{
+		double r = radius + 0.5*trackGauge;
+		return mmToFCurve(mm, r);
+	}
+
+	private double mmToFCurve(double mm, double r)
+	{
+		return (0.5 * mm) / (r*angle.asRadians());
 	}
 
 	private Module3D curveTrackBegin(double fBegin, double fEnd, boolean left)

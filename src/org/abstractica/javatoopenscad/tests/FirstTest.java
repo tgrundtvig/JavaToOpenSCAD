@@ -7,7 +7,7 @@ import org.abstractica.javatoopenscad.coreimpl.codebuilder.textoutput.impl.Strin
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
 import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.csg.CSG;
-import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
+import org.abstractica.javatoopenscad.csg.math.Vector3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 
 import java.util.HashMap;

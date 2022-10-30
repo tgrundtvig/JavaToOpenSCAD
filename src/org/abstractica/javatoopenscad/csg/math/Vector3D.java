@@ -1,7 +1,6 @@
-package org.abstractica.javatoopenscad.csg.csg3d;
+package org.abstractica.javatoopenscad.csg.math;
 
-import org.abstractica.javatoopenscad.coreimpl.core.impl.Coord3DImpl;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.impl.Coord3DImpl;
 
 public interface Vector3D
 {

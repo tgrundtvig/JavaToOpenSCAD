@@ -1,4 +1,4 @@
-package org.abstractica.javatoopenscad.tests;
+package org.abstractica.openbuildsystem.generators.trainsystem.rollingstock.test;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
@@ -6,15 +6,19 @@ import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
 import org.abstractica.javatoopenscad.csg.CSG;
+import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
+import org.abstractica.javatoopenscad.csg.csg2d.Construct2D;
+import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
+import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.plugininterfaces.Module3DImpl;
 import org.abstractica.openbuildsystem.Print3DAdjust;
 import org.abstractica.openbuildsystem.Print3DAdjustImpl;
-import org.abstractica.openbuildsystem.generators.trainsystem.rollingstock.TrainBogie;
+import org.abstractica.openbuildsystem.generators.trainsystem.rollingstock.TrainWheels;
 
 import java.io.IOException;
 
-public class TestTrainBogie implements Module3DImpl
+public class TestTrainWheel implements Module3DImpl
 {
 	@Override
 	public void getArguments(ArgumentCollector collector) {}
@@ -23,16 +27,14 @@ public class TestTrainBogie implements Module3DImpl
 	public Module3D buildGeometry(CSG csg)
 	{
 		Print3DAdjust adj = Print3DAdjustImpl.defaultAdjust;
-		TrainBogie tb = new TrainBogie(csg, adj);
-		//return tb.microSwitchCutout();
-		//return tb.microSwitchHolderCutout();
-		//return tb.microSwitchHolderDouble();
-		//return tb.microSwitchCutout();
-		//return tb.getMicroSwitchBogieBottomPrint();
-		//return tb.getMicroSwitchBogieTopPrint();
-		return tb.getDoubleMotorBogieBottomPrint();
-		//return tb.getDoubleMotorBogieTopPrint();
-		//return tb.mountPlate();
+		//Get shortcuts to the api's you want to use:
+		CSG2D csg2D = csg.csg2D();
+		Shapes2D s2D = csg2D.shapes2D();
+		Construct2D c2D = csg2D.construct2D();
+		Construct3D c3D = csg.csg3D().construct3D();
+
+		TrainWheels tw = new TrainWheels(csg, adj);
+		return tw.sawWheel();
 	}
 
 
@@ -40,7 +42,7 @@ public class TestTrainBogie implements Module3DImpl
 	public static void main(String[] args) throws IOException
 	{
 		ModuleFactory factory = new CSGImpl();
-		OpenSCADModule module = factory.module3D(new TestTrainBogie());
+		OpenSCADModule module = factory.module3D(new TestTrainWheel());
 		OpenSCADFileOutput.generateOutput(module);
 	}
 }

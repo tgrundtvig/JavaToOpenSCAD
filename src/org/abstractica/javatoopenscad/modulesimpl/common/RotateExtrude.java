@@ -3,7 +3,7 @@ package org.abstractica.javatoopenscad.modulesimpl.common;
 import org.abstractica.javatoopenscad.coreimpl.codebuilder.CodeBuilder;
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.BuiltInModule;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.Angle;
 
 public class RotateExtrude implements BuiltInModule
 {

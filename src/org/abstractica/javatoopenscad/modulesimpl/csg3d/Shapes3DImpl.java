@@ -4,7 +4,7 @@ import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.impl.AModuleFactory;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
 import org.abstractica.javatoopenscad.csg.csg3d.Shapes3D;
-import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
+import org.abstractica.javatoopenscad.csg.math.Vector3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.modulesimpl.csg3d.shapes3d.Box3D;
 import org.abstractica.javatoopenscad.modulesimpl.csg3d.shapes3d.Cone3D;

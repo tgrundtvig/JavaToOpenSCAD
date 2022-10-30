@@ -1,28 +1,24 @@
-package org.abstractica.javatoopenscad.coreimpl.core.impl;
+package org.abstractica.javatoopenscad.csg.math.impl;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.HasArguments;
-import org.abstractica.javatoopenscad.csg.Angle;
-import org.abstractica.javatoopenscad.csg.csg3d.Polar3D;
-import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
+import org.abstractica.javatoopenscad.csg.math.Angle;
+import org.abstractica.javatoopenscad.csg.math.Polar2D;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
 
-public class Coord3DImpl implements Vector3D, Polar3D, HasArguments
+public class Coord2DImpl implements Vector2D, Polar2D, HasArguments
 {
 	private final double x;
 	private final double y;
-	private final double z;
 	private final double r;
 	private final Angle theta;
-	private final Angle elevation;
 
-	public Coord3DImpl(double x, double y, double z, double r, Angle theta, Angle elevation)
+	public Coord2DImpl(double x, double y, double r, Angle theta)
 	{
 		this.x = x;
 		this.y = y;
-		this.z = z;
 		this.r = r;
 		this.theta = theta;
-		this.elevation = elevation;
 	}
 
 	@Override
@@ -38,13 +34,7 @@ public class Coord3DImpl implements Vector3D, Polar3D, HasArguments
 	}
 
 	@Override
-	public Angle elevation()
-	{
-		return elevation;
-	}
-
-	@Override
-	public Vector3D asVector3D()
+	public Vector2D asVector2D()
 	{
 		return this;
 	}
@@ -62,13 +52,7 @@ public class Coord3DImpl implements Vector3D, Polar3D, HasArguments
 	}
 
 	@Override
-	public double z()
-	{
-		return z;
-	}
-
-	@Override
-	public Polar3D asPolar3D()
+	public Polar2D asPolar2D()
 	{
 		return this;
 	}
@@ -78,26 +62,24 @@ public class Coord3DImpl implements Vector3D, Polar3D, HasArguments
 	{
 		collector.add("x", x);
 		collector.add("y", y);
-		collector.add("z", z);
 	}
 
 	@Override
 	public String getSimpleName()
 	{
-		return "Vector3D";
+		return "Vector2D";
 	}
 
 	@Override
 	public boolean equals(Object o)
 	{
 		if (this == o) return true;
-		if (!(o instanceof Coord3DImpl)) return false;
+		if (!(o instanceof Coord2DImpl)) return false;
 
-		Coord3DImpl coord3D = (Coord3DImpl) o;
+		Coord2DImpl coord2D = (Coord2DImpl) o;
 
-		if (Double.compare(coord3D.x, x) != 0) return false;
-		if (Double.compare(coord3D.y, y) != 0) return false;
-		return Double.compare(coord3D.z, z) == 0;
+		if (Double.compare(coord2D.x, x) != 0) return false;
+		return Double.compare(coord2D.y, y) == 0;
 	}
 
 	@Override
@@ -108,8 +90,6 @@ public class Coord3DImpl implements Vector3D, Polar3D, HasArguments
 		temp = Double.doubleToLongBits(x);
 		result = (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(y);
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(z);
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}

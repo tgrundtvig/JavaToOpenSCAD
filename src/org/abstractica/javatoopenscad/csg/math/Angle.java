@@ -1,6 +1,6 @@
-package org.abstractica.javatoopenscad.csg;
+package org.abstractica.javatoopenscad.csg.math;
 
-import org.abstractica.javatoopenscad.coreimpl.core.impl.AngleImpl;
+import org.abstractica.javatoopenscad.csg.math.impl.AngleImpl;
 
 public interface Angle
 {

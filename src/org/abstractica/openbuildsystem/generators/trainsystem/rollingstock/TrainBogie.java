@@ -4,15 +4,16 @@ import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2DFrom2D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.Angle;
 import org.abstractica.javatoopenscad.csg.CSG;
-import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
 import org.abstractica.javatoopenscad.csg.csg3d.Shapes3D;
 import org.abstractica.openbuildsystem.*;
+import org.abstractica.openbuildsystem.generators.clicksystem.ClickSystem;
+import org.abstractica.openbuildsystem.generators.clicksystem.ClickSystemImpl;
 import org.abstractica.openbuildsystem.generators.sourced.microswitches.MicroSwitchRoller;
 import org.abstractica.openbuildsystem.generators.sourced.motors.dc.TTMotor;
-import org.abstractica.openbuildsystem.unused.ClickSystemOld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +84,8 @@ public class TrainBogie
 		hole.add(wireHole);
 		Module3DFrom3D diff = c3d.difference3D().add(solid).add(hole);
 		//Clicker holes
-		ClickSystemOld cs = new ClickSystemOld();
-		Module3D clickCutout = cs.clickerCutout(true, csg, adjust);
+		ClickSystem cs = new ClickSystemImpl(csg, adjust, 5);
+		Module3D clickCutout = cs.clickerCutout(5);
 		clickCutout = c3d.translate3D(0.5*WIDTH-MP_SPACER_WIDTH-7.5, 0, MP_HEIGHT+MP_MOUNT_THICKNESS+MP_SPACER_HEIGHT)
 				.add(clickCutout);
 		for(int i = 0; i < 8; ++i)
@@ -110,8 +111,8 @@ public class TrainBogie
 		hole.add(wireHole);
 		Module3DFrom3D diff = c3d.difference3D().add(solid).add(hole);
 		//Clicker holes
-		ClickSystemOld cs = new ClickSystemOld();
-		Module3D clickCutout = cs.clickerCutout(true, csg, adjust);
+		ClickSystem cs = new ClickSystemImpl(csg, adjust, 5);
+		Module3D clickCutout = cs.clickerCutout(5);
 		clickCutout = csg.csg3D().construct3D().translate3D(0.5*WIDTH-MP_SPACER_WIDTH-7.5, 0, 0).add(clickCutout);
 		for(int i = 0; i < 8; ++i)
 		{

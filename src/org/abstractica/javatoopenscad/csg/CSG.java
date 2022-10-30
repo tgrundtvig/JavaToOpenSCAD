@@ -1,6 +1,4 @@
 package org.abstractica.javatoopenscad.csg;
-
-
 import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
 import org.abstractica.javatoopenscad.csg.csg3d.CSG3D;
 

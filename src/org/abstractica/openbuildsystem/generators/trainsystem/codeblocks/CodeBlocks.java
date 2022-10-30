@@ -3,12 +3,13 @@ package org.abstractica.openbuildsystem.generators.trainsystem.codeblocks;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
-import org.abstractica.javatoopenscad.csg.Angle;
+import org.abstractica.javatoopenscad.csg.math.Angle;
 import org.abstractica.javatoopenscad.csg.CSG;
-import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
-import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
-import org.abstractica.openbuildsystem.unused.ClickSystemOld;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
+import org.abstractica.javatoopenscad.csg.math.Vector3D;
 import org.abstractica.openbuildsystem.Print3DAdjust;
+import org.abstractica.openbuildsystem.generators.clicksystem.ClickSystem;
+import org.abstractica.openbuildsystem.generators.clicksystem.ClickSystemImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,12 +204,12 @@ public class CodeBlocks
 
 	private Module3D codeBlockMount()
 	{
-		ClickSystemOld cs = new ClickSystemOld();
+		ClickSystem cs = new ClickSystemImpl(csg, adjust,5);
 		Module3D box = csg.csg3D().shapes3D().box3D(length+2*adjust.solidSquareTight().xy(),
 													10/*+2* adjust.getXYAdjust()*/, 5);
 		box = csg.csg3D().construct3D().translate3D(0,0,2.5).add(box);
 		Module3DFrom3D diff = csg.csg3D().construct3D().difference3D().add(box);
-		Module3D clickCutout = cs.clickerCutout(true, csg, adjust);
+		Module3D clickCutout = cs.clickerCutout(5);
 		diff.add(csg.csg3D().construct3D().translate3D(-0.5*length+5,0,0).add(clickCutout));
 		diff.add(csg.csg3D().construct3D().translate3D(0.5*length-5,0,0).add(clickCutout));
 		return diff;

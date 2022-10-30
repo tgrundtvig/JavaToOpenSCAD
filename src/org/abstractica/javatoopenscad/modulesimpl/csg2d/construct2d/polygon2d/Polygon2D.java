@@ -3,7 +3,7 @@ package org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.polygon2d;
 import org.abstractica.javatoopenscad.coreimpl.codebuilder.CodeBuilder;
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.BuiltInModule;
-import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Path2D;
 
 import java.util.ArrayList;

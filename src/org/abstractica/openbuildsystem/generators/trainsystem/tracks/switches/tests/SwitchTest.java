@@ -1,12 +1,10 @@
-package org.abstractica.javatoopenscad.tests;
+package org.abstractica.openbuildsystem.generators.trainsystem.tracks.switches.tests;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
-import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
-import org.abstractica.javatoopenscad.csg.Angle;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
 import org.abstractica.javatoopenscad.csg.csg2d.Construct2D;
@@ -16,11 +14,11 @@ import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.plugininterfaces.Module3DImpl;
 import org.abstractica.openbuildsystem.Print3DAdjust;
 import org.abstractica.openbuildsystem.Print3DAdjustImpl;
-import org.abstractica.openbuildsystem.generators.trainsystem.NewTrack;
+import org.abstractica.openbuildsystem.generators.trainsystem.tracks.switches.Switch;
 
 import java.io.IOException;
 
-public class TestNewTrack implements Module3DImpl
+public class SwitchTest implements Module3DImpl
 {
 	@Override
 	public void getArguments(ArgumentCollector collector) {}
@@ -33,32 +31,40 @@ public class TestNewTrack implements Module3DImpl
 		Shapes2D s2D = csg2D.shapes2D();
 		Construct2D c2D = csg2D.construct2D();
 		Construct3D c3D = csg.csg3D().construct3D();
-		Print3DAdjust adjust = Print3DAdjustImpl.defaultAdjust;
-		NewTrack nt = new NewTrack();
-		Module3DFrom3D union = csg.csg3D().construct3D().union3D();
-		union.add(c3D.translate3D(0,0,5).add(nt.innerCurvedTrack(600, csg, adjust)));
-		union.add(c3D.translate3D(0,0,5).add(nt.outerCurvedTrack(600, csg, adjust)));
-		Module3D sleeper = nt.sleeper(csg, adjust);
-		union.add(sleeper);
-		union.add(c3D.translate3D(-600,0,0)
-				.add(c3D.rotateZ(Angle.rotations(1.0 / 64))
-						.add(c3D.translate3D(600, 0, 0)
-								.add(sleeper))));
-		union.add(c3D.translate3D(-600,0,0)
-				.add(c3D.rotateZ(Angle.rotations(1.0 / 32))
-						.add(c3D.translate3D(600, 0, 0)
-								.add(sleeper))));
-		union.add(c3D.translate3D(0,0,10).add(nt.curvedCodeBlockBase(csg, adjust)));
+
+		Print3DAdjust adj = Print3DAdjustImpl.defaultAdjust;
+
+		Switch sw = new Switch(csg, adj);
+		Module3DFrom3D union = c3D.union3D();
+
+		//union.add(sw.switchLayout());
+		union.add(sw.allSleepers());
+		//union.add(sw.switchTrack(true));
+		//union.add(sw.switchTrack(false));
+		//union.add(sw.crossSection());
+
+		union.add(sw.stdTrack(3, 4, true, false, false));
+		//union.add(sw.stdTrack(0, 2, false, false, false));
+		//union.add(sw.stdTrack(2, 4, true, true, true));
+		//union.add(sw.stdTrack(2, 4, false, false, true));
+		//union.add(sw.stdTrack(4, 6, true, true, true));
+		//union.add(sw.stdTrack(4, 6, false, false, true));
+		//union.add(sw.stdTrack(2, 3, false, true, true));
+		//union.add(sw.stdTrack(2, 3, true, false, true));
+		//union.add(sw.stdTrack(4, 6, false, true, true));
+		//union.add(sw.stdTrack(4, 6, true, false, true));
+		//union.add(sw.sleeper(0));
+		//union.add(sw.sleeper(1));
+		union.add(sw.switchTrack(true));
+		union.add(sw.switchTrack(false));
+		//union.add(sw.handleBar());
 		return union;
-		//return nt.straightTrack(csg, adjust);
 	}
 
-
-	// main method to execute playground code
 	public static void main(String[] args) throws IOException
 	{
 		ModuleFactory factory = new CSGImpl();
-		OpenSCADModule module = factory.module3D(new TestNewTrack());
+		Module3D module = factory.module3D(new SwitchTest());
 		OpenSCADFileOutput.generateOutput(module);
 	}
 }

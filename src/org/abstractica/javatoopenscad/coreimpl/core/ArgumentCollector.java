@@ -1,10 +1,10 @@
 package org.abstractica.javatoopenscad.coreimpl.core;
 
-import org.abstractica.javatoopenscad.csg.Angle;
-import org.abstractica.javatoopenscad.csg.csg2d.Polar2D;
-import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
-import org.abstractica.javatoopenscad.csg.csg3d.Polar3D;
-import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
+import org.abstractica.javatoopenscad.csg.math.Angle;
+import org.abstractica.javatoopenscad.csg.math.Polar2D;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
+import org.abstractica.javatoopenscad.csg.math.Polar3D;
+import org.abstractica.javatoopenscad.csg.math.Vector3D;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.construct2d.polygon2d.Polygon2D;
 
 import java.util.List;

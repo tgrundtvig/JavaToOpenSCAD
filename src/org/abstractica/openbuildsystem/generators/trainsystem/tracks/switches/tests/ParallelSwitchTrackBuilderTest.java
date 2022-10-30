@@ -1,24 +1,23 @@
-package org.abstractica.javatoopenscad.tests;
+package org.abstractica.openbuildsystem.generators.trainsystem.tracks.switches.tests;
 
 import org.abstractica.javatoopenscad.coreimpl.core.ArgumentCollector;
 import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
-import org.abstractica.javatoopenscad.coreimpl.core.OpenSCADModule;
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
+import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3DFrom3D;
 import org.abstractica.javatoopenscad.coreimpl.fileoutput.OpenSCADFileOutput;
 import org.abstractica.javatoopenscad.csg.CSG;
 import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
-import org.abstractica.javatoopenscad.csg.csg2d.Construct2D;
-import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
 import org.abstractica.javatoopenscad.csg.csg3d.Construct3D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.plugininterfaces.Module3DImpl;
 import org.abstractica.openbuildsystem.Print3DAdjust;
 import org.abstractica.openbuildsystem.Print3DAdjustImpl;
-import org.abstractica.openbuildsystem.generators.trainsystem.rollingstock.TrainWheels;
+import org.abstractica.openbuildsystem.generators.trainsystem.tracks.switches.ParallelSwitchTrackBuilder;
+import org.abstractica.openbuildsystem.generators.trainsystem.tracks.TrackBuilder;
 
 import java.io.IOException;
 
-public class TestTrainWheel implements Module3DImpl
+public class ParallelSwitchTrackBuilderTest implements Module3DImpl
 {
 	@Override
 	public void getArguments(ArgumentCollector collector) {}
@@ -26,23 +25,27 @@ public class TestTrainWheel implements Module3DImpl
 	@Override
 	public Module3D buildGeometry(CSG csg)
 	{
-		Print3DAdjust adj = Print3DAdjustImpl.defaultAdjust;
 		//Get shortcuts to the api's you want to use:
 		CSG2D csg2D = csg.csg2D();
-		Shapes2D s2D = csg2D.shapes2D();
-		Construct2D c2D = csg2D.construct2D();
 		Construct3D c3D = csg.csg3D().construct3D();
 
-		TrainWheels tw = new TrainWheels(csg, adj);
-		return tw.sawWheel();
+		Print3DAdjust adj = Print3DAdjustImpl.defaultAdjust;
+
+		TrackBuilder trackBuilder = new TrackBuilder(csg, adj, 5, 10, 2, 1);
+		ParallelSwitchTrackBuilder sTrackBuilder = new ParallelSwitchTrackBuilder(
+				csg, adj, trackBuilder, 80, 480, 120, true, 1024);
+		Module3DFrom3D union = c3D.union3D();
+		union.add(sTrackBuilder.trackSection(0,1,true, true));
+		union.add(sTrackBuilder.trackSection(0,1,true, false));
+		union.add(sTrackBuilder.trackSection(0,1, false, true));
+		union.add(sTrackBuilder.trackSection(0,1, false, false));
+		return union;
 	}
 
-
-	// main method to execute playground code
 	public static void main(String[] args) throws IOException
 	{
 		ModuleFactory factory = new CSGImpl();
-		OpenSCADModule module = factory.module3D(new TestTrainWheel());
+		Module3D module = factory.module3D(new ParallelSwitchTrackBuilderTest());
 		OpenSCADFileOutput.generateOutput(module);
 	}
 }

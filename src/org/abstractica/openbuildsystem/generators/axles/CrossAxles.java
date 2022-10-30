@@ -2,8 +2,8 @@ package org.abstractica.openbuildsystem.generators.axles;
 
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.*;
 import org.abstractica.javatoopenscad.csg.CSG;
-import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
-import org.abstractica.javatoopenscad.csg.csg3d.Vector3D;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
+import org.abstractica.javatoopenscad.csg.math.Vector3D;
 import org.abstractica.openbuildsystem.Print3DAdjust;
 
 public class CrossAxles

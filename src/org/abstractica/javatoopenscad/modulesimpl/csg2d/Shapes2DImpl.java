@@ -1,12 +1,10 @@
 package org.abstractica.javatoopenscad.modulesimpl.csg2d;
 
 import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module2D;
-import org.abstractica.javatoopenscad.coreimpl.core.ModuleFactory;
 import org.abstractica.javatoopenscad.coreimpl.core.impl.AModuleFactory;
-import org.abstractica.javatoopenscad.csg.Angle;
-import org.abstractica.javatoopenscad.csg.csg2d.CSG2D;
+import org.abstractica.javatoopenscad.csg.math.Angle;
 import org.abstractica.javatoopenscad.csg.csg2d.Shapes2D;
-import org.abstractica.javatoopenscad.csg.csg2d.Vector2D;
+import org.abstractica.javatoopenscad.csg.math.Vector2D;
 import org.abstractica.javatoopenscad.modulesimpl.CSGImpl;
 import org.abstractica.javatoopenscad.modulesimpl.csg2d.shapes2d.*;
 
