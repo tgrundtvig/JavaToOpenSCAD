@@ -18,9 +18,14 @@ public class CSGImpl extends OpenSCADCoreImpl implements CSG
 	private static final double DEGREES_TO_ROTATIONS = 1.0/360.0;
 	private static final double RADIANS_TO_ROTATIONS = 1.0/(2.0*Math.PI);
 
-	public CSGImpl(String moduleDirectoryName)
+	public CSGImpl(String moduleDirectoryName, boolean binarySTL)
 	{
-		super(moduleDirectoryName);
+		super(moduleDirectoryName, binarySTL);
+	}
+
+	public CSGImpl()
+	{
+		super(null, false);
 	}
 
 	@Override
@@ -65,7 +70,7 @@ public class CSGImpl extends OpenSCADCoreImpl implements CSG
 			vertices.add(vector);
 		}
 		Polygon2D polygon = polygon2D(vertices);
-		Geometry2D circle =  geometry2DFromPolygon2D(polygon);
+		Geometry2D circle =  polygon2DGeometry(polygon);
 		return module(circle);
 	}
 
@@ -76,8 +81,7 @@ public class CSGImpl extends OpenSCADCoreImpl implements CSG
 		vertices.add(vector2D(0.5, 0.5));
 		vertices.add(vector2D(-0.5, 0.5));
 		vertices.add(vector2D(-0.5, -0.5));
-		Polygon2D polygon = polygon2D(vertices);
-		Geometry2D rect =  geometry2DFromPolygon2D(polygon);
+		Geometry2D rect =  polygon2DGeometry(vertices);
 		return module(rect);
 	}
 

@@ -23,7 +23,7 @@ public interface OpenSCADCore
 	Path path(Iterable<Integer> path);
 	Polygon2D polygon2D(Iterable<Vector2D> vertices);
 	Polygon2D polygon2D(Iterable<Vector2D> vertices, Iterable<Path> paths);
-	Geometry2D geometry2DFromPolygon2D(Polygon2D polygon);
+	Geometry2D polygon2DGeometry(Polygon2D polygon);
 
 	//Construction
 	Geometry2DFrom2D translate2D(double x, double y);
@@ -57,7 +57,7 @@ public interface OpenSCADCore
 	// 3D operations
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	Geometry3DFrom3D translate3D(double x, double y, double z);
-	Geometry3DFrom3D rotate3D(double xDeg, double yDeg, Double zDeg);
+	Geometry3DFrom3D rotate3D(double xDeg, double yDeg, double zDeg);
 	Geometry3DFrom3D scale3D(double x, double y, double z);
 	Geometry3DFrom3D resize3D(double x, double y, double z, boolean autoX, boolean autoY, boolean autoZ);
 	Geometry3DFrom3D mirror3D(double normX, double normY, double normZ);

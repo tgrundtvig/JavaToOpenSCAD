@@ -30,12 +30,19 @@ import java.util.Map;
 public class OpenSCADCoreImpl implements OpenSCADCore
 {
 	private final String moduleDirectoryName;
+	private final boolean binarySTL;
 	private final Map<Integer, AGeometry> uniqueModules;
 
-	public OpenSCADCoreImpl(String moduleDirectoryName)
+	public OpenSCADCoreImpl(String moduleDirectoryName, boolean binarySTL)
 	{
 		this.moduleDirectoryName = moduleDirectoryName;
+		this.binarySTL = binarySTL;
 		this.uniqueModules = new HashMap<>();
+	}
+
+	public OpenSCADCoreImpl()
+	{
+		this(null, false);
 	}
 
 	@Override
@@ -63,7 +70,7 @@ public class OpenSCADCoreImpl implements OpenSCADCore
 	}
 
 	@Override
-	public Geometry2D geometry2DFromPolygon2D(Polygon2D polygon)
+	public Geometry2D polygon2DGeometry(Polygon2D polygon)
 	{
 		return new Geometry2DFromPolygon2DImpl(polygon);
 	}
@@ -195,7 +202,7 @@ public class OpenSCADCoreImpl implements OpenSCADCore
 	}
 
 	@Override
-	public Geometry3DFrom3D rotate3D(double xDeg, double yDeg, Double zDeg)
+	public Geometry3DFrom3D rotate3D(double xDeg, double yDeg, double zDeg)
 	{
 		return new Rotate3DImpl(xDeg, yDeg, zDeg);
 	}
@@ -331,9 +338,12 @@ public class OpenSCADCoreImpl implements OpenSCADCore
 	@Override
 	public void saveSTL(String name, Geometry3D geometry)
 	{
-		String prefix = "OpenSCAD/Modules/" + name;
+		String prefix = moduleDirectoryName + "/" + name;
 		generateOpenSCADFile(prefix +".scad", geometry);
-		boolean succes = CmdLine.runCommand("openscad -o " + prefix + ".stl " + prefix +".scad");
+		String exportFormat = "--export-format ";
+		exportFormat += binarySTL ? "binstl " : "asciistl ";
+		String cmd = "openscad " + exportFormat + " -o " + prefix + ".stl " + prefix +".scad";
+		boolean succes = CmdLine.runCommand(cmd);
 		if(!succes) throw new RuntimeException("Could not generate: " + prefix + ".stl");
 	}
 

@@ -3,7 +3,7 @@ package org.abstractica.openscadcsg.intf.csg2D;
 import org.abstractica.openscadcore.intf.Geometry2D;
 import org.abstractica.openscadcore.intf.polygon.Vector2D;
 
-public interface CSG2DBase extends Rotation2DBase
+public interface CSG2DBase extends Polygon2DBase
 {
 	//Ellipse based geometry
 	Geometry2D ellipse(double diameterX, double diameterY, int angularResolution);

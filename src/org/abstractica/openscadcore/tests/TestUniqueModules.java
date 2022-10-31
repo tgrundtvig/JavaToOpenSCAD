@@ -16,14 +16,14 @@ public class TestUniqueModules
 {
 	public static void main(String[] args) throws IOException
 	{
-		OpenSCADCore os = new OpenSCADCoreImpl(null);
+		OpenSCADCore os = new OpenSCADCoreImpl();
 		List<Vector2D> vertices1 = new ArrayList<>();
 		vertices1.add(os.vector2D(1,-1));
 		vertices1.add(os.vector2D(1,2));
 		vertices1.add(os.vector2D(-1,1));
 		vertices1.add(os.vector2D(-1,-1));
 		Polygon2D polygon1 = os.polygon2D(vertices1);
-		Geometry2D geo1 = os.geometry2DFromPolygon2D(polygon1);
+		Geometry2D geo1 = os.polygon2DGeometry(polygon1);
 		Geometry2D t1 = os.translate2D(1,1).add(geo1);
 		Geometry2DFrom2D r1 = os.rotate2D(45).add(t1);
 		Geometry2D m1 = os.module(r1);
@@ -34,7 +34,7 @@ public class TestUniqueModules
 		vertices2.add(os.vector2D(-1,1));
 		vertices2.add(os.vector2D(-1,-1));
 		Polygon2D polygon2 = os.polygon2D(vertices2);
-		Geometry2D geo2 = os.geometry2DFromPolygon2D(polygon2);
+		Geometry2D geo2 = os.polygon2DGeometry(polygon2);
 		Geometry2DFrom2D t2 = os.translate2D(1,1).add(geo2);
 		Geometry2DFrom2D r2 = os.rotate2D(45).add(t2);
 		Geometry2D m2 = os.module(r2);
