@@ -1,0 +1,10 @@
+package org.abstractica.openscadcore.impl;
+
+public interface ArgumentCollector
+{
+	void add(boolean b);
+	void add(int i);
+	void add(double d);
+	void add(String str);
+	void add(HasArguments element);
+}
