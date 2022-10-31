@@ -9,7 +9,7 @@ public abstract class AGeometryLeaf extends AGeometry
 	@Override
 	public final void collectArguments(ArgumentCollector collector)
 	{
-		collector.add(getClassName());
+		collector.add(getClass());
 		getArguments(collector);
 	}
 

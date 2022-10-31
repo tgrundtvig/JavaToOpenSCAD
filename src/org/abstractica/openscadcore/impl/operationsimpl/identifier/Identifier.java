@@ -13,10 +13,15 @@ public class Identifier implements ArgumentCollector
 	public Identifier(HasArguments item)
 	{
 		this.uniqueIdStr = new StringBuilder();
-		uniqueIdStr.append(AllStrings.id(item.getClassName()));
 		item.collectArguments(this);
 		id = AllStrings.id(uniqueIdStr.toString());
 		this.uniqueIdStr = null;
+	}
+
+	@Override
+	public void add(Class c)
+	{
+		uniqueIdStr.append("c").append(AllStrings.id(c.getName()));
 	}
 
 	@Override

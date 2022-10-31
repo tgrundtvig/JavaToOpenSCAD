@@ -2,6 +2,7 @@ package org.abstractica.openscadcore.impl;
 
 public interface ArgumentCollector
 {
+	void add(Class c);
 	void add(boolean b);
 	void add(int i);
 	void add(double d);

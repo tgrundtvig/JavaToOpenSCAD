@@ -1,6 +1,5 @@
 package org.abstractica.openscadcore.impl;
 
-import org.abstractica.javatoopenscad.coreimpl.core.moduletypes.Module3D;
 import org.abstractica.openscadcore.impl.cmdline.CmdLine;
 import org.abstractica.openscadcore.impl.codebuilder.CodeBuilder;
 import org.abstractica.openscadcore.impl.codebuilder.impl.CodeBuilderImpl;
@@ -30,7 +29,14 @@ import java.util.Map;
 
 public class OpenSCADCoreImpl implements OpenSCADCore
 {
-	private final static Map<Integer, AGeometry> uniqueModules = new HashMap<>();
+	private final String moduleDirectoryName;
+	private final Map<Integer, AGeometry> uniqueModules;
+
+	public OpenSCADCoreImpl(String moduleDirectoryName)
+	{
+		this.moduleDirectoryName = moduleDirectoryName;
+		this.uniqueModules = new HashMap<>();
+	}
 
 	@Override
 	public Vector2D vector2D(double x, double y)
@@ -270,13 +276,32 @@ public class OpenSCADCoreImpl implements OpenSCADCore
 	@Override
 	public Geometry3D module(Geometry3D geometry)
 	{
-		int id = getId(geometry);
-		Geometry3D res = loadSTL("OpenSCAD/Modules/M" + id + ".stl");
-		return new Module3DImpl(res, getId(res));
+		int geometryId = getId(geometry);
+		if(moduleDirectoryName == null)
+		{
+			AGeometry geo = uniqueModules.get(geometryId);
+			if(geo == null)
+			{
+				geo = (AGeometry) geometry;
+				uniqueModules.put(geometryId, geo);
+			}
+			return new Module3DImpl(geo, geometryId);
+		}
+
+		AGeometry res = (AGeometry) loadSTL(moduleDirectoryName + "/M" + geometryId + ".stl");
+		int loaderId = getId(res);
+		AGeometry geo = uniqueModules.get(loaderId);
+		if(geo == null)
+		{
+			geo = (AGeometry) res;
+			uniqueModules.put(loaderId, geo);
+			saveSTL("M" + geometryId, geometry);
+		}
+		return new Module3DImpl(geo, loaderId);
 	}
 
 	@Override
-	public void generateOpenSCADFile(String fileName, Geometry geometry) throws IOException
+	public void generateOpenSCADFile(String fileName, Geometry geometry)
 	{
 		java.nio.file.Path path = Paths.get(fileName);
 		TextOutput out = new StringBuilderTextOutput();
@@ -286,9 +311,15 @@ public class OpenSCADCoreImpl implements OpenSCADCore
 				"(", ", ", ")"  );
 		generate(cb,(AGeometry) geometry);
 		java.nio.file.Path parentDir = path.getParent();
-		if (parentDir != null && !Files.exists(parentDir))
-			Files.createDirectories(parentDir);
-		Files.writeString(path, cb.toString());
+		try
+		{
+			if (parentDir != null && !Files.exists(parentDir))
+				Files.createDirectories(parentDir);
+			Files.writeString(path, cb.toString());
+		}catch(IOException e)
+		{
+			throw new RuntimeException("Could not create OpenSCAD file: " + fileName, e);
+		}
 	}
 
 	@Override
@@ -298,7 +329,7 @@ public class OpenSCADCoreImpl implements OpenSCADCore
 	}
 
 	@Override
-	public void saveSTL(String name, Geometry3D geometry) throws IOException
+	public void saveSTL(String name, Geometry3D geometry)
 	{
 		String prefix = "OpenSCAD/Modules/" + name;
 		generateOpenSCADFile(prefix +".scad", geometry);

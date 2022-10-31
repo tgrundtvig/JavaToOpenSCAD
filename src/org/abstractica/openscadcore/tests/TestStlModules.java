@@ -4,6 +4,7 @@ import org.abstractica.openscadcore.impl.OpenSCADCoreImpl;
 import org.abstractica.openscadcore.impl.operationsimpl.identifier.AllStrings;
 import org.abstractica.openscadcore.intf.Geometry2D;
 import org.abstractica.openscadcore.intf.Geometry2DFrom2D;
+import org.abstractica.openscadcore.intf.Geometry3D;
 import org.abstractica.openscadcore.intf.OpenSCADCore;
 import org.abstractica.openscadcore.intf.polygon.Polygon2D;
 import org.abstractica.openscadcore.intf.polygon.Vector2D;
@@ -16,7 +17,9 @@ public class TestStlModules
 {
 	public static void main(String[] args) throws IOException
 	{
-		OpenSCADCore os = new OpenSCADCoreImpl();
+		String moduleDirectoryName = System.getProperty("user.dir")
+				.replace("\\", "/")+ "/OpenSCAD/Modules";
+		OpenSCADCore os = new OpenSCADCoreImpl(moduleDirectoryName);
 		List<Vector2D> vertices1 = new ArrayList<>();
 		vertices1.add(os.vector2D(1,-1));
 		vertices1.add(os.vector2D(1,2));
@@ -38,10 +41,16 @@ public class TestStlModules
 		Geometry2DFrom2D t2 = os.translate2D(1,1).add(geo2);
 		Geometry2DFrom2D r2 = os.rotate2D(45).add(t2);
 		Geometry2D m2 = os.module(r2);
-		//t2.add(geo1);
-
 		Geometry2DFrom2D union = os.union2D().add(m1).add(m2);
-		os.generateOpenSCADFile("OpenSCAD/output.scad", union);
+
+		Geometry3D res1 = os.linearExtrude(5, 0, 1, 1, 10).add(union);
+		Geometry3D res2 = os.linearExtrude(5, 0, 1, 1, 10).add(union);
+		res1 = os.module(res1);
+		res2 = os.module(res2);
+		Geometry3D union2 = os.union3D().add(res1).add(res2);
+
+
+		os.generateOpenSCADFile("OpenSCAD/output.scad", union2);
 
 		System.out.println(AllStrings.listAllStrings());
 	}

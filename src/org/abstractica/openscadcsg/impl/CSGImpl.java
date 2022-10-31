@@ -17,6 +17,12 @@ public class CSGImpl extends OpenSCADCoreImpl implements CSG
 {
 	private static final double DEGREES_TO_ROTATIONS = 1.0/360.0;
 	private static final double RADIANS_TO_ROTATIONS = 1.0/(2.0*Math.PI);
+
+	public CSGImpl(String moduleDirectoryName)
+	{
+		super(moduleDirectoryName);
+	}
+
 	@Override
 	public Angle rotations(double rot)
 	{

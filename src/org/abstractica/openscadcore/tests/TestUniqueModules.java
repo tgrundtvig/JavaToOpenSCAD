@@ -16,7 +16,7 @@ public class TestUniqueModules
 {
 	public static void main(String[] args) throws IOException
 	{
-		OpenSCADCore os = new OpenSCADCoreImpl();
+		OpenSCADCore os = new OpenSCADCoreImpl(null);
 		List<Vector2D> vertices1 = new ArrayList<>();
 		vertices1.add(os.vector2D(1,-1));
 		vertices1.add(os.vector2D(1,2));
@@ -41,7 +41,7 @@ public class TestUniqueModules
 		//t2.add(geo1);
 
 		Geometry2DFrom2D union = os.union2D().add(m1).add(m2);
-		os.generateOpenSCADFile("OpenSCAD/output.scad", union);
+		os.generateOpenSCADFile("OpenSCAD/output.scad", m1);
 
 		System.out.println(AllStrings.listAllStrings());
 	}
