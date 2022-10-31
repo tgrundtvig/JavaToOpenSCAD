@@ -39,24 +39,24 @@ public class SwitchTest implements Module3DImpl
 
 		//union.add(sw.switchLayout());
 		union.add(sw.allSleepers());
-		//union.add(sw.switchTrack(true));
-		//union.add(sw.switchTrack(false));
-		//union.add(sw.crossSection());
-
-		union.add(sw.stdTrack(3, 4, true, false, false));
-		//union.add(sw.stdTrack(0, 2, false, false, false));
-		//union.add(sw.stdTrack(2, 4, true, true, true));
-		//union.add(sw.stdTrack(2, 4, false, false, true));
-		//union.add(sw.stdTrack(4, 6, true, true, true));
-		//union.add(sw.stdTrack(4, 6, false, false, true));
-		//union.add(sw.stdTrack(2, 3, false, true, true));
-		//union.add(sw.stdTrack(2, 3, true, false, true));
-		//union.add(sw.stdTrack(4, 6, false, true, true));
-		//union.add(sw.stdTrack(4, 6, true, false, true));
-		//union.add(sw.sleeper(0));
-		//union.add(sw.sleeper(1));
 		union.add(sw.switchTrack(true));
 		union.add(sw.switchTrack(false));
+		union.add(sw.crossSection());
+
+		union.add(sw.stdTrack(0, 2, true, true, false));
+		union.add(sw.stdTrack(0, 2, false, false, false));
+		union.add(sw.stdTrack(2, 4, true, true, true));
+		union.add(sw.stdTrack(2, 4, false, false, true));
+		union.add(sw.stdTrack(4, 6, true, true, true));
+		union.add(sw.stdTrack(4, 6, false, false, true));
+		union.add(sw.stdTrack(2, 3, false, true, true));
+		union.add(sw.stdTrack(2, 3, true, false, true));
+		union.add(sw.stdTrack(4, 6, false, true, true));
+		union.add(sw.stdTrack(4, 6, true, false, true));
+		//union.add(sw.sleeper(0));
+		//union.add(sw.sleeper(1));
+		//union.add(sw.switchTrack(true));
+		//union.add(sw.switchTrack(false));
 		//union.add(sw.handleBar());
 		return union;
 	}

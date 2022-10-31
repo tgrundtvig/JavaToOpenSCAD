@@ -13,8 +13,8 @@ public class Switch
 {
 	private final double trackGauge = 80;
 	private final double totalLength = 600;
-	private final double xTranslate = 200;
-	private final double sleeperLength = 140;
+	private final double xTranslate = 120;
+	private final double sleeperLength = 120;
 	private final double sleeperWidth = 30;
 	private final int angularResolution = 1024;
 	private final int numberOfSleepers = 7;
