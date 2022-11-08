@@ -97,6 +97,16 @@ public class ClickSystemImpl implements ClickSystem
 	}
 
 	@Override
+	public Module3D crossClickerCutout(double length)
+	{
+		Module3D clickerCutout = clickerCutout(length);
+		Module3DFrom3D union = csg.csg3D().construct3D().union3D();
+		union.add(clickerCutout);
+		union.add(csg.csg3D().construct3D().rotateZ(Angle.degrees(90)).add(clickerCutout));
+		return union;
+	}
+
+	@Override
 	public Module3D roundClicker(double length)
 	{
 		if(length+0.0001 < 2*unitHeight)
